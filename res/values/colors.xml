@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <color name="opaque_red">#f00</color>
+   <color name="translucent_red">#80ff0000</color>
+   <color name="userIdLabelBlack">#333333</color>
+   <color name="passwordLabelBlack">#333333</color>
+    <color name="checkBoxTextBlack">#333333</color>
+   <color name="dark_pink">#CC0066</color>
+   <color name="dark_violet">#9400D3</color>
+   <color name="dark_purple">#990066</color>
+<drawable name="red">#80ff0000</drawable>
+</resources>
