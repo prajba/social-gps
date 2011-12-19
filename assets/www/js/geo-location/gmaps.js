@@ -2,7 +2,7 @@ var map
 var marcador
 
   function initializeGMaps() {
-    var latlng = new google.maps.LatLng(-34.397, 150.644);
+    var latlng = new google.maps.LatLng(43.4609602, -3.8079336);
     var myOptions = {
       zoom: 8,
       center: latlng,
