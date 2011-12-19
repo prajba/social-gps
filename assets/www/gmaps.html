@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<style type="text/css">
+  html { height: 100% }
+  body { height: 100%; margin: 0; padding: 0 }
+  #map_canvas { height: 100% }
+</style>
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?sensor=true">
+</script>
+<script type="text/javascript" charset="utf-8" src="js/common/phonegap-1.2.0.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/common/socialGPSUtil.js"></script>    
+<script type="text/javascript" charset="utf-8" src="js/geo-location/gmaps.js"></script> 
+
+</head>
+<body onload="initializeGMaps()">
+  <div id="map_canvas" style="width:100%; height:90%"></div>
+   <button onClick="showMyLocation()"> Show my location </button>
+    <button onClick="hrefURL('index.html')"> Home </button>
+</body>
+</html>
