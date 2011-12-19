@@ -2,7 +2,6 @@ package org.university.socgps;
 
 import android.os.Bundle;
 import com.phonegap.*;
-
 public class SocialgpsActivity extends DroidGap {
     /** Called when the activity is first created. */
     @Override
