@@ -1,0 +1,84 @@
+/*  ------------------------------------------------------------------------
+                    Facebook | IE7/PC Hacks | getfirefox.com
+    ------------------------------------------------------------------------  */
+
+.inputbutton,
+.inputsubmit {
+  padding: 0px 3px }
+
+.clearfix, #userprofile {
+  overflow : hidden ! important;
+  _height : 1% ! important;
+}
+
+#nav a {
+  width:115px;
+  display:block;
+
+}
+
+.print_shop .printshop_items {
+  padding:0;
+}
+
+#profilenarrowcolumn {
+  margin-right: 9px!important;
+}
+
+/* ----------------------------|  UBERSEARCH |----------------------------  */
+
+.ubersearch .filters fieldset legend {
+  margin: -5px -10px 0px -7px;
+  padding-bottom: 4px;
+  width: 133px }
+
+.filters #label_c2, .filters #label_c1 {
+  display:block;
+}
+
+/* ----------------------------| NOTIFICATIONS |----------------------------  */
+
+.notifications .submission small {
+  line-height:12px;
+}
+
+.notification_checkboxes {
+  margin-top:-8px;
+}
+
+.notifications label {
+  display:inline-block;
+}
+
+/* ------------------------------| FEEDBACK |--------------------------------  */
+
+.explanation .square_bullets {
+  margin-left:0;
+}
+
+.feedback .mixer_panel .saved_notification {
+  display:inline-block;
+}
+
+.feedback .mixer_panel .left_buttons, .feedback .mixer_panel .right_buttons {
+  margin-top:1px;
+}
+
+.feedback .mixer_panel .mixer_bar {
+  margin-top:5px;
+  margin-bottom:1px;
+}
+
+.vslider {
+  padding-bottom: 19px;
+}
+
+/* --------------------------------| SHARE |---------------------------------  */
+
+#shareitems .share_and_hide {
+  width:60px;
+}
+
+#shareitems .x_to_hide {
+  float:right;
+}

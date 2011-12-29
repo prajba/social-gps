@@ -1,0 +1,240 @@
+
+/*  ------------------------------------------------------------------------
+                                    MapYourBuddies
+    ------------------------------------------------------------------------  */
+
+body {
+  background: #fff;
+  font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+  font-size: 11px;
+  margin: 0px;
+  padding: 0px;
+  text-align: left; }
+
+h1, h2, h3 {
+  margin: 0px;
+  padding: 0px; }
+
+h2 {
+  color: #3b5998 }
+
+h1 { font-size: 14px; }
+  h1 a { color: white; text-decoration: none; }
+  h1 a:hover { color: white; text-decoration: underline; }
+  h1 em { font-style: normal; border-bottom: solid 1px #D8DFEA; }
+  h1 .subtitle { } /* Reserved */
+
+h2 { font-size: 11px; }
+
+p {
+  font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+  font-size: 11px;
+  text-align: left; }
+
+a {
+  color: #3b5998;
+  text-decoration: none; }
+
+img {
+  border: 0px; }
+
+
+#bubble {
+height: 125px; 
+width: 250px;
+padding: 0px;
+}
+
+#bubbleimg {
+height: 100px; 
+width: 50px;
+float:left;
+margin-bottom: 5px;
+}
+
+#bubbletxt {
+float:left;
+width: 189px;
+margin-left: 5px;
+border-left: solid 1px #000000;
+padding-left: 5px;
+margin-bottom: 5px;
+}
+
+#bubblezoom {
+clear:both;
+height: 20px; 
+width: 250px;
+border-top: solid 1px #000000;
+text-align: center;
+}
+
+
+
+#azbubble {
+height: 125px; 
+width: 250px;
+padding: 0px;
+}
+
+#azbubbleinfo {
+height: 35px;
+width: 250px;
+}
+
+#azbubbleimg {
+float:left;
+height: 90px;
+width: 90px;
+}
+
+#azbubbletxt {
+float:left;
+width: 149px;
+margin-left: 5px;
+border-left: solid 1px #000000;
+padding-left: 5px;
+}
+
+
+#whole {
+  padding: 0px 0px 0px 0px;
+  margin: 0px auto;
+  text-align: left;
+  width: 100%; }
+
+#header1 {
+  background: #3b5998 url(/images/mapyourbuddiesheaderbg.gif) no-repeat top left;
+  height: 33px;
+  position: relative;
+  width: 100%; }
+
+#topnav {
+  right: 0px;
+  line-height: 25px;
+  list-style: none;
+  margin: 0px;
+  padding: 3px 0px;
+  position: absolute;
+  text-align: right;
+  top: 1px;
+  width: 200px;
+  border: solid 0px #ffffff;}
+
+  #topnav li {
+    display: inline; }
+  #topnav a {
+    color: #D8DFEA;
+    margin: auto 0px;
+    padding: 2px 4px; }
+  #topnav a:hover {
+    background-color: #526DA4;
+    color: white; }
+
+#header2 {
+  font-weight: bold;
+  line-height: 23px;
+  font-size: 14px;
+  padding: 0px 10px 0px;
+  margin-left: 132px;
+  background: #6d84b4;
+  color: white;
+  border-bottom: solid 1px #3B5998; 
+  border: solid 0px #ff0000; }
+
+#content {
+  background-color: #F7F7F7;
+  padding: 6px;
+  margin-left: 132px;
+  border-bottom: solid 1px #3B5998;
+  border-left: solid 1px #D8DFEA; }
+
+#map {
+  background-color: #FFFFFF;
+  float: left;
+  padding: 6px;
+  border: solid 1px #CCCCCC;
+  height: 500px;
+  width: 500px;
+  margin-bottom:6px;}
+
+
+#friends {
+  border: solid 1px #CCCCCC;
+  margin-left: 6px;
+  padding: 6px;
+  float: left;
+  width: 250px;
+  height: 500px;
+  overflow: auto; }
+
+#clear {
+  clear: left;
+  height: 0px; }
+
+.sidebar_headline {
+
+  padding:3px 5px 4px 5px;
+  background:#e9e9e9;
+  text-align:left;
+  font-weight: bold; }
+
+#friend {
+  border: solid 1px #CCCCCC;
+  background-color: #FFFFFF;
+  margin-top: 6px;
+  padding: 6px; }
+
+#footer {
+  padding: 6px;
+  text-align: center;
+  margin-left: 132px;
+  border: solid 0px #000000; 
+}
+
+.friendslist a:focus{
+  background:#d8dfea;
+  border-top:1px solid #3b5998;
+  border-bottom:1px solid #3b5998;
+}
+
+.friendslist a:hover{
+  background:#d8dfea;
+  border-top:1px solid #3b5998;
+  border-bottom:1px solid #3b5998;
+}
+
+.friendslist a:active{
+  background:#d8dfea;
+  border-top:1px solid #3b5998;
+  border-bottom:1px solid #3b5998;
+}
+
+.friendslist a{
+  margin-bottom: -5px;
+  display:block;
+  padding: 5px 7px 7px 10px;
+  color:#333;
+  border-top:1px solid #CCCCCC;
+  border-bottom:1px solid #CCCCCC;
+  background:#F7F7F7;
+  text-decoration:none;
+}
+
+.friendslist #noadd{
+  border-top:1px solid #CCCCCC;
+  border-bottom:1px solid #CCCCCC;
+  background: #E9E9E9;
+}
+
+.friendslist #name{
+  font-size: 13px;
+  font-weight: bold;
+  color:#333;
+}
+
+.friendslist #location{
+  font-size: 11px;
+  font-weight: normal;
+  color:#666;
+}
