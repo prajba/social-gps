@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+    <title>MapYourBuddies | Demo Account</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="css/base.css" type="text/css" />
+    <link rel="stylesheet" href="css/facebook.css" type="text/css" />
+    <link rel="stylesheet" href="css/facebookpro.css" type="text/css" />
+    <link rel="stylesheet" href="css/welcome.css" type="text/css" />
+    <link rel="stylesheet" href="css/mapyourbuddies.css" type="text/css" />
+
+   <script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?sensor=true">
+</script>
+    <script type="text/javascript" src="js/getdemofriendsxml.js"></script>
+    <script type="text/javascript" src="js/getfriendsxml.js"></script>
+    <script type="text/javascript" src="js/popup.js"></script>
+    <script type="text/javascript" src="js/amazon.js"></script>
+    <script type="text/javascript" src="js/friendslist.js"></script>
+    <script type="text/javascript" src="js/gmap.js"></script>
+    <script type="text/javascript" src="js/getwelcometxt.js"></script>
+    <script type="text/javascript" src="js/replacewelcometxt.js"></script>
+
+
+  </head>
+
+  <body onload="load()" onunload="GUnload()">
+
+    <div id="whole">
+
+      <div id="header1">
+
+        <ul id="topnav">
+	  <li><a href="javascript:alert(infotext)">Info</a></li>
+          <li><a href="index.html">Exit Demo Account</a>&nbsp;&nbsp;&nbsp;</li>
+        </ul>
+
+      </div>
+
+      <div id="header2"><h1>Welcome Guest!</h1></div>
+
+      <div id="content">
+        <div id="map"></div>
+        <div id="friends">
+          <div class="sidebar_headline">My Friends</div>
+            <div id="friendslist" class="friendslist"><p id="FLloading" style="text-align: center"><br /><img src="images/waiting.gif" alt="Please Wait" border=0><br /><br />Loading... Please Wait</p></div>
+        </div>
+        <div id="clear"></div>
+      </div>
+
+
+    </div>
+
+
+  </body>
+</html>

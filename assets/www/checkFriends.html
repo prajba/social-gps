@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery MultiSelect Plugin Tests</title>
+
+<link href="css/facebook-css/style.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/facebook-css/facebook.css" />
+<link rel="stylesheet" type="text/css" href="css/common/jquery.multiselect.css" />
+<link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/redmond/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="css/common/buttons.css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/common/jquery.multiselect.js"></script>
+</head>
+<body onload="populateFriends()">
+ <div id="wrapper">		  
+<div id="accordion" style="clear:both">
+<h3><a href="#">Show those who:</a></h3>
+	<div>
+          <form>
+          <p>
+          	 <select style="text-align:left;" id="locations" multiple="multiple" >
+          	 		 <option value="Live">Live in town</option>
+          	 		 <option value="Work">Work in town</option>
+          	 		 <option value="Study">Study in town</option>
+          	 </select>
+          </p>
+          </form>
+	</div>
+<h3><a href="#">Select friends from current town:</a></h3>
+		   <div>		   		
+				<form>
+				<p>
+				   <select style="text-align:left;" id="friends" multiple="multiple">				
+				   </select>
+				</p>				  
+				</form>
+		   </div>
+
+<h3><a href="#">Inform friends:</a></h3>
+		   <div>		   		
+				<form>
+				<p>
+				   <select id="informFriends" multiple="multiple" >				   		
+							 <option value="sms">Send SMS</option>							
+          	 				<option value="email">Send E-mail</option>          	 		
+				   </select>
+				   <br><br>
+				   <a  class="button" href="informOptions.html">
+				           <img src="img/common/button.png" alt="" />Execute options
+					</a>	
+				</p>
+				</form>
+		   </div>
+</div>
+<br>
+	 <a  class="button" href="gmaps.html">
+        <img src="img/gmaps/gmaps3.png" alt="" />Show Map
+	</a>&nbsp;&nbsp;&nbsp;&nbsp;
+	 <a class="button" href="index.html">
+        <img src="img/common/back1.png" alt="" />Back  
+	</a>
+	</div>
+<script type="text/javascript" src="js/check-friends-controller/checkfriends.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery MultiSelect Plugin Tests</title>
+
+<link href="css/facebook-css/style.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/facebook-css/facebook.css" />
+<link rel="stylesheet" type="text/css" href="css/common/jquery.multiselect.css" />
+<link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" type="text/css" href="css/common/buttons.css" />
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/redmond/jquery-ui.css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/common/jquery.multiselect.js"></script>
+
+</head>
+<body>
+
+ <div id="wrapper">		
+<div id="accordion" style="clear:both">
+<h3><a href="#">Show Places:</a></h3>
+	<div>
+          <form action="#" method="post">
+          <p>
+          	 <select id="places" name="places" multiple="multiple" >
+          	 		 <option value="Restaurants">Restaurants</option>
+          	 		 <option value="Pubs">Pubs</option>
+          	 </select>
+          </p>
+          </form>
+	</div>
+<h3><a href="#">Other selections:</a></h3>
+		   <div>		   		
+				<form action="#" method="post">
+				<p>
+				   <select id="infowindow" name="infowindow" multiple="multiple" >		
+				   		    <option value="youtube">Show Youtube Video</option>
+          	 				<option value="facebook">Show Facebook Page</option>          	 		
+				   </select>
+				</p>
+				</form>
+
+		   </div>
+</div>
+<br>
+<a class="button" href="javascript:showbtn();">
+        <img src="img/gmaps/gmaps3.png" alt="" />Show Map
+	</a>	&nbsp;&nbsp;&nbsp;&nbsp;
+ 
+<a type="submit" class="button" href="index.html">
+        <img src="img/common/back1.png" alt="" />Back  
+	</a>
+</div>
+<script type="text/javascript" src="js/check-places-controller/checkplaces.js"></script>
+</body>
+</html>

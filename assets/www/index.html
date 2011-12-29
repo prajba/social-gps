@@ -1,28 +1,71 @@
 <!DOCTYPE HTML>
 <html>
-
   <head>
-    <title>PhoneGap</title>
+    <title>SocialGPS</title>
+  <link rel="stylesheet" type="text/css" href="css/common/buttons.css" />
+<link href="css/facebook-css/style.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/facebook-css/facebook.css" />
+<link rel="stylesheet" type="text/css" href="css/common/jquery.multiselect.css" />
+<link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" type="text/css" href="css/common/buttons.css" />
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/redmond/jquery-ui.css" />
 
+  <script src="http://connect.facebook.net/en_US/all.js"></script>
+  <script type="text/javascript" charset="utf-8" src="js/facebook-connection/facebook_connection.js"></script>
   <script type="text/javascript" charset="utf-8" src="js/common/phonegap-1.2.0.js"></script>      
-  <script type="text/javascript" charset="utf-8" src="js/common/socialGPSUtil.js"></script>  
-  <script type="text/javascript" charset="utf-8">
-
-     function onLoad(){
-          document.addEventListener("deviceready", onDeviceReady, true);
-     }
-
-     function onDeviceReady(){
-          navigator.notification.alert("PhoneGap is working");
-     }
-
-  </script>
-
+  <script type="text/javascript" charset="utf-8" src="js/common/socialGPSUtil.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="js/common/jquery.multiselect.js"></script>
   </head>
+  <body>	
+ <div id="wrapper">		
+  
+   <a class="button" href="getFriends.html">
+        <img src="img/facebook/fb_icon1.png" alt="" />
+			 Connect to FB			
+	</a>
+<br>	
 
-  <body onload="onLoad();">     
-	   <h3>   <button onClick="hrefURL('gmaps.html')"> GeoLocation </button></h3>
-	   <h3>   <button onClick="hrefURL('getFriends.html')"> GetFacebookFriends </button></h3>
+<div id="fb-root">
+
+</div>
+
+	<br>
+	 <a class="button" href="checkFriends.html">
+        <img src="img/common/button.png" alt="" />FB Options   
+	</a>
+	<br>	<br>
+	 <a class="button" href="checkPlaces.html">
+        <img src="img/common/button.png" alt="" />Select Places    
+	</a>
+	<br>	<br>
+	 <a class="button" href="gmaps.html">
+        <img src="img/gmaps/gmaps3.png" alt="" />
+		Show Map  
+	</a>	
+</div>
+
+<script type="text/javascript">
+    $(function(){
+	        $(".button").hover(function(){
+                $(".button img")
+                .animate({top:"-10px"}, 200).animate({top:"-4px"}, 200) // first jump
+                .animate({top:"-7px"}, 100).animate({top:"-4px"}, 100) // second jump
+                .animate({top:"-6px"}, 100).animate({top:"-4px"}, 100); // the last jump
+            });
+    
+		$("select").multiselect();
+
+			$("#dialog").dialog({
+								 title: "Please wait...",
+								 		
+			});
+
+});
+</script>
+<br><br>
+
   </body>
-
+   
 </html>

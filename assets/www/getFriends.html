@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>Facebook Profile Images Application</title>
+<!-- Include the Facebook Javascript API -->
+<script src="http://connect.facebook.net/en_US/all.js"></script>
+<!-- Include the normal stylesheet-->
+<link href="css/facebook-css/style.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/facebook-css/facebook.css" />
+<link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" type="text/css" href="css/common/jquery.multiselect.css" />
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/redmond/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="css/common/buttons.css" />
+<script type="text/javascript" charset="utf-8" src="js/common/socialGPSUtil.js"></script>    
+<script type="text/javascript" charset="utf-8" src="js/facebook-connection/facebook_connection.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/common/jquery.json2xml.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/common/jquery.multiselect.js"></script> 
+</head>
+<body>
+	<div id="fb-root"></div>
+	<div id="wrapper">			
+	<a class="button" id="friendBtn" href="javascript:loginFacebook();">
+        <img src="img/facebook/fb_icon1.png" alt="" />Connect			
+	</a>&nbsp;&nbsp;&nbsp;&nbsp;
+   <a class="button" id="friendBtn" href="javascript:getFriends();">
+        <img src="img/facebook/icon-facebook.png" alt="" />Show friends			
+	</a>&nbsp;&nbsp;&nbsp;&nbsp;
+	<a class="button" href="index.html">
+        <img src="img/common/back1.png" alt="" />Back  
+	</a>
+		<!-- the following div will show the status messages during the workflow of application-->		
+		<div id="status"></div>
+		<!-- shows the images loaded till now-->
+		<div id="count"></div>
+		<!-- holds all the profile pics-->
+		<div id="pics"></div>
+		<table id="location"></table>
+	</div>
+	<pre id="result"></pre>
+	
+<script type="text/javascript">
+     $(document).ready(function(){
+            $(".button").hover(function(){
+                $(".button img")
+                .animate({top:"-10px"}, 200).animate({top:"-4px"}, 200) // first jump
+                .animate({top:"-7px"}, 100).animate({top:"-4px"}, 100) // second jump
+                .animate({top:"-6px"}, 100).animate({top:"-4px"}, 100); // the last jump
+            });
+        }); 
+$("#foo").multiselect();
+$("#bar").multiselect({ multiple:false });
+$("#accordion").accordion();
+$("select").multiselect(
+{
+   selectedList: 4
+}
+);	
+$("select").multiselect().multiselectfilter();
+$("form").bind("submit", function(){
+	alert( $(this).serialize() );
+	return false;
+});
+</script>
+</body>
+</html>

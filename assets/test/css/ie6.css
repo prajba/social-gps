@@ -1,0 +1,316 @@
+/*  ------------------------------------------------------------------------
+                    Facebook | IE/PC Hacks | getfirefox.com
+    ------------------------------------------------------------------------  */
+
+.inputbutton,
+.inputsubmit {
+  padding: 0px 3px }
+
+#tabs { margin-top: 22px }
+
+#announce p { word-wrap: break-word } 
+
+#suggest div { cursor: hand }
+
+.welcome #content h2 { margin-top: 20px }
+
+.timeline h2 span {
+  text-align: left;
+  padding-bottom: 1px;
+  padding-left: 0.7em; }
+
+.timeline .quietyear p { padding-bottom: 6px }
+
+.timeline .scrapbook div {
+  padding-top: 12px; }
+
+#quailquote {
+  padding-bottom:3px;}
+
+#content {
+        border-right:0;
+		background-image:url(/images/contentrightline.gif) !important;
+		background-repeat:repeat-y;
+		padding-right:1px !important;
+		background-position:577px 0; }
+
+#group.profile .related {
+	word-wrap:break-word; }
+
+.print_shop .printshop_items {
+  padding:0;
+}
+
+
+
+/*  ---------------------------|  SIDEBAR NAV  |----------------------------  */
+
+#nav li#myprofile { border-bottom: 1px solid #d8dfea }
+#nav li#myprofile a { border: 0 }
+
+/*  ---------------------------|  HIGHLIGHTING  |---------------------------  */
+
+.highlight, .inserted {
+ line-height: 17px; }
+
+/*  ----------------------------|  UBERSEARCH  |----------------------------  */
+
+.dropdown-container {
+  margin-left: 1px; }
+
+#goodFrame {
+  position: absolute;
+  z-index: 0;
+  border: 0px;
+  filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=0); }
+
+.ubersearch .uber_bar #label_q {}
+
+.ubersearch .uber_bar #n_dropdown { margin-top: 2px; }
+
+.filters legend { cursor: hand }
+
+.ubersearch .filters fieldset legend {
+  margin: -5px -10px 0px -7px;
+  padding-bottom: 4px;
+  width: 133px }
+
+.filters #label_c2, .filters #label_c1 {
+  display:block;
+}
+
+.ubersearch .filters .checkbox { padding-bottom: 0px; }
+.ubersearch .filters .checkbox input { margin: 0px; }
+.ubersearch .filters .checkbox label { margin: 0px; }
+
+.ubersearch #filters_sx label { padding: 0px }
+.ubersearch #filters_sx .filter_controls { padding-bottom: 2px }
+
+.browse .filters {
+  padding-right:0;
+  float:right;
+}
+
+.ubersearch .filters {
+  padding-right:0;
+ }
+
+/*  -------------------------|  CLASSMATE SEARCH  |-------------------------  */
+
+.classmate_query .inputtext { width: 231px }
+
+.classmate_query select { margin-top: 1px }
+
+/*  -----------------------------|  COMPOSE  |------------------------------  */
+
+.mailbox .dropdown-container { margin-top: 1px; margin-left: 2px; }
+#message_image { margin-left: 4px;}
+
+/* ----------------------------|  DISCUSSIONS  |----------------------------  */
+
+.profile .discussions .board_topic { width: 368px }
+
+/*  ----------------------------|  MY GROUPS  |-----------------------------  */
+
+.grouplist .infotable .datawrap { display: block; width: 300px }
+#groupslist .info { width: 420px }
+
+/*  ----------------------------|  GUESTLIST  |-----------------------------  */
+
+.confirmed .people_table td { width: 56px }
+.confirmed .people_table table td.name div { width: 54px }
+
+.guestlist .people_table td { width: 60px }
+.guestlist .people_table table td.name div { width: 58px }
+
+/*  ---------------------------|  EDIT ACCOUNT  |---------------------------  */
+
+.editaccount .action_box .buttons input { width: 140px }
+
+/*  ---------------------------|  EDIT PROFILE  |---------------------------  */
+
+.subrow td table td {
+	border-left: 2px solid;
+	border-top: 3px solid; }
+
+.editor_panel .subrow td table td {
+  border-left: 2px solid #f7f7f7;
+  border-top: 3px solid #f7f7f7; }
+
+.subrow td table td input { margin-top:1px }
+
+.school select { margin-bottom:1px }
+
+.highschool select { margin-top:2px }
+
+.editor_panel #uploadpicture { width: 325px }
+
+.editprofile .noneditable_value { width: 170px }
+
+.editprofile .editor_actions { float: left; padding-left: 5px; }
+
+/*  ------------------------------|  NOTES  |-------------------------------  */
+
+#notes_content {
+  background:#f7f7f7 url(/images/notes_background_ie6.gif) repeat-y 0px 0px; }
+
+.set {
+  padding-left:1px;
+}
+
+#create_note {
+  padding-left:0;
+  margin-left:1px;
+}
+
+.editnote .side_column {
+  margin:0 0 0 8px;
+}
+
+.delete_note #content {
+  padding-right:105px ! important;
+}
+
+#blog_url_field .inputtext {
+  width:285px;
+}
+
+.side_column #tag_this_note .inputtext {
+  margin: 0px;
+  width: 141px; }
+
+.editnote .main_column {
+  width: 408px; }
+
+.editnote #upload_iframe {
+  height: 48px; }
+
+/*  ---------------------------|  HOMESLICE  |----------------------------  */
+
+.home #home_container #home_main {
+  display:inline;
+}
+
+.sidebar_item_header .option {
+  margin-top:5px;
+}
+
+/*  ---------------------------|  HOMESLICE  |----------------------------  */
+
+#home_feedintro {
+  width:435px;
+  padding-bottom:13px;
+}
+
+#home_feedintro h4 {
+  display:inline;
+  padding-right:100px;
+}
+
+#orientation .orientation_im_done {
+  display: inline-block;
+  padding-bottom: 20px;
+}
+
+/*  ---------------------------|  MINIFEED  |----------------------------  */
+
+.minifeed {
+  padding-top:0;
+}
+
+.minifeed .photobox {
+  padding-bottom:1px;
+}
+
+.minifeed_archive #content {
+  background-image:url(/images/minifeed_right_bg.gif) !important;
+  background-repeat:repeat-y;
+  padding-right:1px !important;
+  background-position:597px 0;
+}
+
+.welcome #content_stage {
+  padding: 0px 20px 20px 25px; }
+
+
+
+/*  ------------------------------|  SHARE  |-------------------------------  */
+
+.ext_sharer #main_column {
+  border-right: 1px solid #ccc;
+  width: 439px;
+}
+
+.my_sharebox .share_header .share_and_hide {
+  width: 7.0em; }
+
+
+
+.share_media .external .video_thumb a img.decoy {
+  display: none;
+}
+
+.share_media .external .video_thumb a span.thumb {
+  position: relative; 
+}
+
+.share_media .external .video_thumb a span.thumb img {
+  visibility: hidden;
+}
+
+.share_media .external .video_thumb a span.play {
+  background-image: url(/images/video_play_overlay.gif);
+  display: none;
+  position: relative;
+}
+
+/* ----------------------------| NOTIFICATIONS |----------------------------  */
+
+.notifications .submission small {
+  line-height:12px;
+}
+
+.notification_checkboxes {
+  margin-top:-8px;
+}
+
+.notifications label {
+  display:inline-block;
+}
+
+/* ------------------------------| FEEDBACK |--------------------------------  */
+
+.explanation .square_bullets {
+  margin-left:0;
+}
+
+.feedback .mixer_panel .saved_notification {
+  display:inline-block;
+}
+
+.feedback .mixer_panel .left_buttons, .feedback .mixer_panel .right_buttons {
+  margin-top:1px;
+}
+
+.feedback .mixer_panel .mixer_bar {
+  margin-top:5px;
+  margin-bottom:1px;
+}
+
+.vslider {
+  padding-bottom: 19px;
+}
+
+.transparent_png {
+    display: none;
+}
+
+.transparent_png_ie6 {
+    display: block;
+}
+
+/*  -----------------------------|  MADNESS  |------------------------------  */
+
+#center_column {
+  margin-top: 15px;
+}
