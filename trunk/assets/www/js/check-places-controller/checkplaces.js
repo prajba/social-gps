@@ -15,7 +15,15 @@ $("select").multiselect(
 }
 );	
 $("select").multiselect().multiselectfilter();
+
+function savePlacesToLocalStorage()
+{
+	alert("saving places");
+	 var places = $('#places').serialize();		   
+	 localStorage.setItem("places",places);				
+}
 function showbtn(){
+		alert("showbtn called")
 		 var places = $('#places').serialize();
 		 var infos = $('#infowindow').serialize();		   
 		 localStorage.setItem("places",places);		
@@ -23,5 +31,4 @@ function showbtn(){
 		 alert(infos);
 		  var storedData = localStorage.getItem("places");
 		  alert(storedData);
-		  window.location.href="gmaps.html";
 };
