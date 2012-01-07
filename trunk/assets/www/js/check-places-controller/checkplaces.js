@@ -20,7 +20,8 @@ function showbtn(){
 		 var infos = $('#infowindow').serialize();		   
 		 localStorage.setItem("places",places);		
 		 localStorage.setItem("infowindow",infos);		
-//		  var storedData = localStorage.getItem("places");
-//		  alert(storedData);
+		 alert(infos);
+		  var storedData = localStorage.getItem("places");
+		  alert(storedData);
 		  window.location.href="gmaps.html";
 };
