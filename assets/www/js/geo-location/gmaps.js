@@ -1,4 +1,5 @@
 var map;
+var markersArray = [];
 var marcador;
 var infowindow;
 var friends = new Array();
@@ -7,11 +8,10 @@ var mylocation;
 $('#page-map').live(
 		"pagecreate",
 		function() {
-			// alert("Map pagecreated");
 			geocoder = new google.maps.Geocoder();
 			var mylocation = new google.maps.LatLng(43.4609602, -3.8079336);
 			var myOptions = {
-				zoom : 8,
+				zoom : 12,
 				center : mylocation,
 				mapTypeId : google.maps.MapTypeId.ROADMAP
 			};
@@ -34,7 +34,6 @@ $('#page-map').live(
 			google.maps.event.addListener(marcador, 'click', function() {
 				infowindow.open(map, marcador);
 			});
-			alert("Map drawing places");
 			showMyLocation();
 			mapBuddies();
 			mapPlaces();
@@ -118,35 +117,40 @@ function mapBuddies() {
 function mapPlaces() {
 	// key AIzaSyAsl9yODaiNyShVLlpjiNYAoSagn2rpAi8
 	// https://maps.googleapis.com/maps/api/place/search/json?location=-33.8670522,151.1957362&radius=500&types=food&sensor=false&key=AIzaSyAsl9yODaiNyShVLlpjiNYAoSagn2rpAi8
-	alert('mapplaces');
-	var storedData = localStorage.getItem('places');
-	alert(storedData);
-	alert('storeddata: ' + storedData)
+	storedData=localStorage.getItem("places");
+	clearMarkers();
 	if (storedData) {
 		splitedData = storedData.split('&');
-		alert('splitteddata: '+splitedData);
 		for ( var j = 0; j < splitedData.length; j++) {
-			alert("Iteration "+j);
-			splitedPlaces=splitedData.split('=');
-			alert("ASDFA");
-			//alert("places: "+j+":"+splitedPlaces[0]);
+			//alert("Iteration "+j);
+			splitedPlaces = splitedData[j].split('=');
+			//alert("SplitedPlaces: "+splitedPlaces[1]);
+			addPlaces(splitedPlaces[1]);
 		}
 	}
-	initializePlaces();
 }
 
-function initializePlaces() {
-	alert("initializePlaces");
+function addPlaces(type) {
 	var request = {
 		location : mylocation,
 		radius : 5000,
-		types : [ 'food' ]
+		types : [ type ]
 	};
 	infowindow = new google.maps.InfoWindow();
 	var service = new google.maps.places.PlacesService(map);
 	service.search(request, callback);
 }
 
+function clearMarkers(){
+	  if (markersArray) {
+		    for (i in markersArray) {
+		      markersArray[i].setMap(null);
+		    }
+		    markersArray.length = 0;
+	  }
+}
+//TODO put an argument in callback so marker will be loaded
+//with the image.png when image=type of place loaded
 function callback(results, status) {
 	if (status == google.maps.places.PlacesServiceStatus.OK) {
 		for ( var i = 0; i < results.length; i++) {
@@ -159,33 +163,38 @@ function createMarker(place) {
 	var placeLoc = place.geometry.location;
 	var marker = new google.maps.Marker({
 		map : map,
+		icon : new google.maps.MarkerImage('img/places/restaurant.png'),
+		animation: google.maps.Animation.DROP,
 		position : place.geometry.location
 	});
-
+	// Create a marker
+	// Add the marker to the map
 	google.maps.event.addListener(marker, 'click', function() {
 		infowindow.setContent(place.name);
 		infowindow.open(map, this);
 	});
+	markersArray.push(marker);
 }
 
 function showMyLocation() {
-	alert(
 	navigator.geolocation.getCurrentPosition(onGPSRead, onGPSError, {
 		enableHighAccuracy : true
-	}))
+	})
 }
 
 function onGPSRead(location) {
-	alert('onReadGPSRead');
 	mylocation = new google.maps.LatLng(location.coords.latitude,
 			location.coords.longitude);
 	map.setCenter(mylocation);
 	marcador.setPosition(mylocation);	
 	localStorage.setItem('latitude',location.coords.latitude);
 	localStorage.setItem('longitude',location.coords.longitude);
-	alert(latrec+"   "+longrec);
+}
+
+function getIcon(color) {
+    return MapIconMaker.createMarkerIcon({width: 20, height: 34, primaryColor: color, cornercolor:color});
 }
 
 function onGPSError() {
-	alerta(" I cannot find you :(")
+	alert(" I cannot find you :(")
 }
