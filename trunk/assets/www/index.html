@@ -17,6 +17,7 @@
 	src="js/common/socialGPSUtil.js"></script>
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAsl9yODaiNyShVLlpjiNYAoSagn2rpAi8&sensor=true"> </script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>
 <script src="js/geo-location/gmaps.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="css/geolocation-css/map.css" />
@@ -74,7 +75,7 @@
 			</div>
 			<div data-role=controlgroup
 				style="font-size: 1em; margin-left: auto; margin-right: auto; width: 100%; text-align: center;">
-				<select name="places" id="places-map" multiple="multiple"
+				<select name="places" id="places" multiple="multiple"
 					data-native-menu="false">
 					<option>Places</option>
 					<option value="Restaurants">Restaurants</option>
@@ -82,7 +83,7 @@
 				</select>
 				<script>
 					//Event on select places changes.
-					$("select#places-map").bind("change", function(event, ui) {
+					$("select#places").bind("change", function(event, ui) {
 						savePlacesToLocalStorage();
 						mapPlaces();
 					});
