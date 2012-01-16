@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 <title>Select Friends</title>
 
 <link href="css/facebook-css/style.css" rel="stylesheet" />
@@ -16,9 +17,20 @@
 	type="text/javascript"></script>
 <script src="js/common/jquery-mobile/jquery.mobile-1.0.min.js"
 	type="text/javascript"></script>
-	
+
+<script type="text/javascript" charset="utf-8"
+	src="js/check-friends-controller/checkfriends.js"></script>
+
 </head>
-<body onload="populateFriends()"> 		  
+<body> 	
+<div data-role="page" class="checkFriends"  id="checkFriends" data-theme="e"
+		data-add-back-btn="true">
+		<div data-role="header" data-position="inline" class="header-socgps">
+			<h1>Check Friends</h1>
+		</div>
+
+<div data-role="content" class="content-friends">
+	  
 <div  data-role="collapsible-set"  data-content-theme="c">
 <div data-role="collapsible" data-theme="e" data-content-theme="d">
 <h3><a href="#">Show those who:</a></h3>
@@ -34,7 +46,12 @@
 </div>
 <div data-role="collapsible" data-theme="e" data-content-theme="d">
 <h3><a href="#">Select friends from current town:</a></h3>
-		   <div data-role="fieldcontain">				
+		   <div data-role="fieldcontain">	
+<script>
+$( "select#friends" ).selectmenu({
+   create: function(event, ui) { populate();}
+});
+</script>			
 				   <select style="text-align:left;" name="friends" id="friends" multiple="multiple" data-native-menu="false">
 						    <option>Choose friends</option>			
 				   </select>				
@@ -61,14 +78,20 @@
 </div>
 
 
+</div>
+
+
+<div data-role="footer" class="footer-friends">
+</div>
+	
 <br>
-	 <a  data-role="button" data-icon="check" data-iconpos="left"  href="index.html#page-map">
-        <img src="img/gmaps/gmaps3.png" alt="" />Show Map
+	 <a  data-role="button" data-icon="check" data-iconpos="right"  href="index.html#page-map">
+      Show Map
 	</a>&nbsp;&nbsp;&nbsp;&nbsp;
-	 <a data-role="button" data-icon="check" data-iconpos="left" href="index.html">
-        <img src="img/common/back1.png" alt="" />Back  
-	</a>
+	
 
 <script type="text/javascript" src="js/check-friends-controller/checkfriends.js"></script>
+
+
 </body>
 </html>
