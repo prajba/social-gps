@@ -86,11 +86,12 @@
 					.api(
 							"/me/friends?fields=id,name,gender,languages,picture,location,birthday",
 							function(response) {
-								friends = response["data"];								
+								friends = response["data"];	
+								//localStorage.setItem("friends",JSON.stringify(friends));					
 								totalToBeLoaded = friends.length;
 								//addNewRow("Name", "Location");	
 								loadLocation(0);				
-								loadImage(0);				
+								//loadImage(0);				
 							});			
 			
 			
@@ -99,26 +100,35 @@
 	}
 
 	
-
+	var real = 0;
 	//load the images one at a time
 	function loadLocation(friendNumber) {
+		var currentLocation = "Hagenberg";//localStorage.getItem("location");
+		//alert(currentLocation);
 		FB.api("/" + friends[friendNumber].id, function(response) {
-			var out = "";	
-			friends[friendNumber] = JSON.stringify(response);		
-			if (response.location != null) {			   				
-				out += response.location["name"];				
+			var out = "";						
+			if (response.location != null) {						   				
+				if (response.location["name"].indexOf(currentLocation) != -1){					
+				if (response.location["name"] != 'undefined'){
+					friends[friendNumber] = JSON.stringify(response);
+					out += response.location["name"];	
+					real = real + 1;
+					alert(response.name);					
+				}	
+				}		
 			} else {			  	
 				out = "--";
 			}		
-			localStorage.setItem("friends",JSON.stringify(friends));						
+			//localStorage.setItem("friends",JSON.stringify(friends));						
 			index = friendNumber; 			
 			//addNewRow(response.name, out);
 			friendLoaded = friendNumber + 1;
 			loadLocation(friendLoaded);
 		});
-		document.getElementById("status").innerHTML = "Loaded locations of "
-				+ friendNumber + " out of " + totalToBeLoaded + " friends";
+		document.getElementById("status").innerHTML = "Please wait! Friends in current town "
+				+ real + " out of " + friendNumber + "  from the total of "+ totalToBeLoaded + " friends";
 	}
+
 
 	//load the images one at a time
 	function loadImage(imgNumber) {
