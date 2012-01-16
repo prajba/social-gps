@@ -15,7 +15,7 @@ function populateFriends(){
   									  			} else {
   												  location = "-";
   									   			}
-  												name = friend.name;  												
+  												name = friend.name;  																		alert(name);
   												var options='<option value="'+name+'">'+name+'</option>';
   												$("select#friends").append(options);
   												$("select#friends").selectmenu("refresh");
