@@ -16,6 +16,7 @@ $("select").multiselect(
 );	
 $("select").multiselect().multiselectfilter();
 
+
 function savePlacesToLocalStorage()
 {
 	 var places = $('#places').serialize();		
@@ -24,6 +25,7 @@ function savePlacesToLocalStorage()
 	 var storedData = localStorage.getItem("places");
 	//  alert("storeddata after saving: "+storedData);
 }
+
 function showbtn(){
 		alert("showbtn called")
 		 var places = $('#places').serialize();
