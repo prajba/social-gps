@@ -1,7 +1,6 @@
 /*Global variables*/
 	var loggedIn = false;
-	var imgLoaded = 0;
-	var friends = null;
+	var imgLoaded = 0;	
 	var totalToBeLoaded = 0;	
 	var friends = new Array();
 	var index = 0;
@@ -101,16 +100,18 @@
 
 	
 	var real = 0;
+	var localFriends = new Array();
 	//load the images one at a time
 	function loadLocation(friendNumber) {
-		var currentLocation = "Hagenberg";//localStorage.getItem("location");
+		var currentLocation = "Brasov";//localStorage.getItem("location");
 		//alert(currentLocation);
+		
 		FB.api("/" + friends[friendNumber].id, function(response) {
 			var out = "";						
 			if (response.location != null) {						   				
 				if (response.location["name"].indexOf(currentLocation) != -1){					
 				if (response.location["name"] != 'undefined'){
-					friends[friendNumber] = JSON.stringify(response);
+					localFriends[real] = JSON.stringify(response);
 					out += response.location["name"];	
 					real = real + 1;
 					alert(response.name);					
@@ -119,7 +120,7 @@
 			} else {			  	
 				out = "--";
 			}		
-			//localStorage.setItem("friends",JSON.stringify(friends));						
+			localStorage.setItem("friends",JSON.stringify(localFriends));						
 			index = friendNumber; 			
 			//addNewRow(response.name, out);
 			friendLoaded = friendNumber + 1;

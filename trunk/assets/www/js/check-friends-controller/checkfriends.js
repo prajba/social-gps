@@ -1,9 +1,17 @@
 
-function populateFriends(){
+$('#checkFriends').live(
+"pagecreate", function(){			
+		 //location.reload();
+}
+);
+
+
+ function populate(){	
+		alert("here")		;
 		  var storedData = localStorage.getItem("friends");
-  							  if (storedData) {
-  							     listdata = JSON.parse(storedData);
-  							   }
+			
+  							  if (storedData != null) {
+  							     listdata = JSON.parse(storedData);	   
   							   var size = listdata.length;
   							   for (var i = 1; i <= 5; i++){
   							   	  if (listdata[i] != null){
@@ -21,7 +29,7 @@ function populateFriends(){
   												$("select#friends").selectmenu("refresh");
   								   }
   							    }
-  	  	   	 				
-};
-
+							}
+  	  	   	 			
+}
     		
