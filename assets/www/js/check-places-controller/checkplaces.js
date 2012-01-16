@@ -18,9 +18,11 @@ $("select").multiselect().multiselectfilter();
 
 function savePlacesToLocalStorage()
 {
-	alert("saving places");
-	 var places = $('#places').serialize();		   
-	 localStorage.setItem("places",places);				
+	 var places = $('#places').serialize();		
+	// alert("saving places");
+	 localStorage.setItem("places",places);		
+	 var storedData = localStorage.getItem("places");
+	//  alert("storeddata after saving: "+storedData);
 }
 function showbtn(){
 		alert("showbtn called")
@@ -29,6 +31,6 @@ function showbtn(){
 		 localStorage.setItem("places",places);		
 		 localStorage.setItem("infowindow",infos);		
 		 alert(infos);
-		  var storedData = localStorage.getItem("places");
-		  alert(storedData);
+		 var storedData = localStorage.getItem("places");
+		 //alert(storedData);
 };
