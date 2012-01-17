@@ -7,8 +7,7 @@
 	
 
 $('#connectToFB').live(
-"pagecreate", function(){	
-	alert("in live!");
+"pagecreate", function(){		
 	FB.init({
 			appId : "152639234839875",
 			status : true,
@@ -75,14 +74,13 @@ $('#connectToFB').live(
 	//gets the list of friends of the logged in person
 	function getFriends_FB() {
 		//if the person has not pressed login button
-		alert("in get Friends");
-
+		
 		if (!loggedIn) {
 			loginFacebook();
 		}
 
 		document.getElementById("status").innerHTML = "Now loading your friends' location...";
-		alert("after...");
+		
 
 		//if the person is loggedIn
 		if (loggedIn) {		
@@ -95,7 +93,7 @@ $('#connectToFB').live(
 								//localStorage.setItem("friends",JSON.stringify(friends));					
 								totalToBeLoaded = friends.length;
 								//addNewRow("Name", "Location");	
-								alert("in fb_init");
+								
 								loadLocation(0);				
 								loadImage(0);				
 							});			
@@ -110,9 +108,7 @@ $('#connectToFB').live(
 	var localFriends = new Array();
 	//load the images one at a time
 	function loadLocation(friendNumber) {
-		var currentLocation = "Brasov";//localStorage.getItem("location");
-		alert(currentLocation);
-		
+		var currentLocation = "Hagenberg";//localStorage.getItem("location");		
 		FB.api("/" + friends[friendNumber].id, function(response) {
 			var out = "";						
 			if (response.location != null) {						   				
@@ -125,7 +121,7 @@ $('#connectToFB').live(
 					var options='<option value="'+name+'">'+name+'</option>';
   					$("select#friends").append(options);
   					$("select#friends").selectmenu("refresh");
-					alert(response.name);					
+									
 				}	
 				}		
 			} else {			  	
