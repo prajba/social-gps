@@ -50,10 +50,6 @@
 
 	src="js/check-places-controller/checkplaces.js"></script>
 
-<script type="text/javascript" charset="utf-8"
-
-	src="js/check-friends-controller/checkfriends.js"></script>
-
 <link href="css/facebook-css/style.css" rel="stylesheet" />
 
 <link rel="stylesheet" href="css/facebook-css/facebook.css" />
@@ -92,7 +88,7 @@
 
 				<li><a href="#page-map" data-transition="slide">GeoLocation</a></li>
 
-				<li><a href="getFriends.html" data-transition="slide">Connect
+	<!-- 		<li><a href="getFriends.html" >>Connect
 
 						to FB</a></li>
 
@@ -102,7 +98,7 @@
 
 				<li><a href="checkPlaces.html" data-transition="slide">Select
 
-						Places</a></li>
+						Places</a></li> -->	
 
 			</ul>
 
@@ -149,6 +145,8 @@
 				<button onClick="#">Friends</button>
 
 				<button onClick="#">Home</button>
+				
+				<button onClick="mobileChangePage('getFriends.html')">GetFriends</button>
 
 			</div>
 
@@ -159,10 +157,13 @@
 				<select name="places" id="places" multiple="multiple"
 					data-native-menu="false">
 					<option>Places</option>
-					<option value="restaurant">Restaurants</option>
-					<option value="cafe">Café</option>
+					<option value="airport">Airport</option>
+					<option value="bank">Bank</option>
 					<option value="bus_station">Bus Station</option>
-					<option value="atm">Bankomat</option>
+					<option value="cafe">Café</option>
+					<option value="hospital">Hospital</option>
+					<option value="restaurant">Restaurants</option>		
+					<option value="university">University</option>
 				</select>
 				<script>
 
