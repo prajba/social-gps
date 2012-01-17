@@ -2,39 +2,76 @@
 <head>
 <title>Get Friends</title>
 <!-- Include the Facebook Javascript API -->
-<script src="http://connect.facebook.net/en_US/all.js"></script>
+
 <!-- Include the normal stylesheet-->
 <link href="css/facebook-css/style.css" rel="stylesheet" />
 <link rel="stylesheet" href="css/facebook-css/facebook.css" />
 <link rel="stylesheet" type="text/css" href="style.css" />
 <link href="js/common/jquery-mobile/jquery.mobile-1.0.min.css" rel="stylesheet" type="text/css" />
 <link href="js/common/jquery-mobile/jquery.mobile.structure-1.0.min.css" rel="stylesheet" type="text/css" />
+
 <script src="js/common/jquery-mobile/jquery-1.7.1.js" type="text/javascript"></script>
 <script src="js/common/jquery-mobile/jquery.mobile-1.0.min.js" type="text/javascript"></script>
+<script src="http://connect.facebook.net/en_US/all.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/common/socialGPSUtil.js"></script>    
 <script type="text/javascript" charset="utf-8" src="js/facebook-connection/facebook_connection.js"></script>
 </head>
 <body>
-	<div id="fb-root"></div>
-	
-	<a id="friendBtn" href="javascript:loginFacebook();"  data-role="button" data-icon="check" data-iconpos="left" >
-        <img src="img/facebook/fb_icon1.png" alt="" />Connect			
-	</a>
-   <a  data-role="button" data-icon="check" data-iconpos="left"  id="friendBtn" href="javascript:getFriends();">
-        <img src="img/facebook/icon-facebook.png" alt="" />Show friends			
-	</a>
-	<a  data-role="button" data-icon="check" data-iconpos="left"  href="index.html">
-        <img src="img/common/back1.png" alt="" />Back  
-	</a>
-		<!-- the following div will show the status messages during the workflow of application-->		
-		<div id="status"></div>
-		<!-- shows the images loaded till now-->
-		<div id="count"></div>
-		<!-- holds all the profile pics-->
-		<div id="pics"></div>
-		<table id="location"></table>
-	
-	<pre id="result"></pre>
-	
+
+<div id="fb-root"></div>
+<div id="status"></div>
+<div id="count"></div>
+<div id="pics"></div>
+<table id="location"></table>	
+<pre id="result"></pre>
+
+<div data-role="page" class="checkFriends"  id="connectToFB" data-theme="e"
+		data-add-back-btn="true">
+		<div data-role="header" data-position="inline" class="header-socgps">
+			<h1>Check Friends</h1>
+		</div>
+
+<div data-role="content" class="content-friends">	
+
+		
+
+	<div data-role="controlgroup"
+style="font-size: 1em; margin-left: auto; margin-right: auto; width: 100%; text-align: center;"
+
+data-type="horizontal">
+	<button onClick="javascript:getFriends()">Get Friends</button>
+</div>
+
+		
+<div  data-role="collapsible-set"  data-content-theme="c">
+<div data-role="collapsible" data-theme="e" data-content-theme="d">
+<h3><a href="#">Select friends from current town:</a></h3>
+		   <div data-role="fieldcontain">	
+			
+				   <select style="text-align:left;" name="friends" id="friends" multiple="multiple" data-native-menu="false">
+						    <option>Choose friends</option>			
+				   </select>				
+		   </div>
+</div>
+</div>
+
+
+</div>
+
+
+<div data-role="footer" class="footer-friends">
+	<div data-role="controlgroup"
+
+				style="font-size: 1em; margin-left: auto; margin-right: auto; width: 100%; text-align: center;"
+
+				data-type="horizontal">
+
+				<button onClick="index.html#page-map">Show map</button>
+
+			</div>
+
+</div>
+</div>
 </body>
 </html>
+

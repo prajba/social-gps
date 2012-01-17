@@ -5,10 +5,11 @@
 	var friends = new Array();
 	var index = 0;
 	
-	/*Logs the user into Facebook*/
-	function loginFacebook() {
-		//initializes the facebook API
-		FB.init({
+
+$('#connectToFB').live(
+"pagecreate", function(){	
+	alert("in live!");
+	FB.init({
 			appId : "152639234839875",
 			status : true,
 			cookie : true,			
@@ -23,13 +24,13 @@
 			"frictionlessRequests" : 1
 		});
 
-		document.getElementById("status").innerHTML = "Waiting for Facebook permission";
+		//document.getElementById("status").innerHTML = "Waiting for Facebook permission";
 
 		//opens the Facebook login window for user
 		FB
 				.login(function(response) {
 					if (response.authResponse) {
-						document.getElementById("status").innerHTML = "Logged In";
+					//	document.getElementById("status").innerHTML = "Logged In";
 						loggedIn = true;
 						 if (response.perms) {
 						      // user is logged in and granted some permissions.
@@ -40,16 +41,16 @@
 								    perms: 'friends_location,friends_photos,friends_work_history,friends_birthday,friends_website,email',
 								    display: 'popup'
 								    },function(response) {
-								        alert(response.toSource());
+								        //alert(response.toSource());
 								        if (response && response.perms) {
-								            alert('Permissions granted: '+response.perms);
+								            //alert('Permissions granted: '+response.perms);
 								        } else if (!response.perms){
-								            alert('User did not authorize permission(s).');
+								           // alert('User did not authorize permission(s).');
 								        }
 								});
 						    }
 					} else {
-						document.getElementById("status").innerHTML = "You have not given required permissions";
+						//document.getElementById("status").innerHTML = "You have not given required permissions";
 						loggedIn = false;
 					}
 				});
@@ -64,13 +65,17 @@
       
 		//disables the login button after the user has loggedIn
 		if (loggedIn) {
-			document.getElementById("loginBtn").disabled = "disabled";
+			//document.getElementById("loginBtn").disabled = "disabled";
 		}
-	}
+}
+);
+
+
 
 	//gets the list of friends of the logged in person
 	function getFriends() {
 		//if the person has not pressed login button
+
 		if (!loggedIn) {
 			loginFacebook();
 		}
@@ -90,7 +95,7 @@
 								totalToBeLoaded = friends.length;
 								//addNewRow("Name", "Location");	
 								loadLocation(0);				
-								//loadImage(0);				
+								loadImage(0);				
 							});			
 			
 			
@@ -104,16 +109,20 @@
 	//load the images one at a time
 	function loadLocation(friendNumber) {
 		var currentLocation = "Brasov";//localStorage.getItem("location");
-		//alert(currentLocation);
+		alert(currentLocation);
 		
 		FB.api("/" + friends[friendNumber].id, function(response) {
 			var out = "";						
 			if (response.location != null) {						   				
-				if (response.location["name"].indexOf(currentLocation) != -1){					
+				if// (response.location["name"].indexOf(currentLocation) != -1){					
 				if (response.location["name"] != 'undefined'){
 					localFriends[real] = JSON.stringify(response);
 					out += response.location["name"];	
 					real = real + 1;
+					name = response.name;
+					var options='<option value="'+name+'">'+name+'</option>';
+  					$("select#friends").append(options);
+  					$("select#friends").selectmenu("refresh");
 					alert(response.name);					
 				}	
 				}		
@@ -177,7 +186,8 @@
 	  var olddiv = document.getElementById(divNum);
 	  d.removeChild(olddiv);
 	}
-
+	
+	
 
 	//calls init function once all the resources are loaded
 	window.addEventListener("load", init, true);
