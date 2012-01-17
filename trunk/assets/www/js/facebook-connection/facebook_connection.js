@@ -73,18 +73,19 @@ $('#connectToFB').live(
 
 
 	//gets the list of friends of the logged in person
-	function getFriends() {
+	function getFriends_FB() {
 		//if the person has not pressed login button
+		alert("in get Friends");
 
 		if (!loggedIn) {
 			loginFacebook();
 		}
 
 		document.getElementById("status").innerHTML = "Now loading your friends' location...";
+		alert("after...");
 
 		//if the person is loggedIn
-		if (loggedIn) {
-			document.getElementById("friendBtn").disabled = "disabled";
+		if (loggedIn) {		
 			
 			FB
 					.api(
@@ -94,6 +95,7 @@ $('#connectToFB').live(
 								//localStorage.setItem("friends",JSON.stringify(friends));					
 								totalToBeLoaded = friends.length;
 								//addNewRow("Name", "Location");	
+								alert("in fb_init");
 								loadLocation(0);				
 								loadImage(0);				
 							});			
@@ -114,7 +116,7 @@ $('#connectToFB').live(
 		FB.api("/" + friends[friendNumber].id, function(response) {
 			var out = "";						
 			if (response.location != null) {						   				
-				if// (response.location["name"].indexOf(currentLocation) != -1){					
+				if (response.location["name"].indexOf(currentLocation) != -1){					
 				if (response.location["name"] != 'undefined'){
 					localFriends[real] = JSON.stringify(response);
 					out += response.location["name"];	
