@@ -138,7 +138,9 @@ function addPlaces(type) {
 	};
 	infowindow = new google.maps.InfoWindow();
 	var service = new google.maps.places.PlacesService(map);
-	service.search(request, callback);
+	service.search(request, function addPlacesCallback(results,status){
+		addPlacesCallbackWithType(results,status,type);
+	});
 }
 
 function clearMarkers(){
@@ -151,19 +153,23 @@ function clearMarkers(){
 }
 //TODO put an argument in callback so marker will be loaded
 //with the image.png when image=type of place loaded
-function callback(results, status) {
+function addPlacesCallbackWithType(results, status,type) {
 	if (status == google.maps.places.PlacesServiceStatus.OK) {
 		for ( var i = 0; i < results.length; i++) {
-			createMarker(results[i]);
+			createMarker(results[i],type);
 		}
 	}
 }
 
-function createMarker(place) {
+function createMarker(place,type) {
 	var placeLoc = place.geometry.location;
 	var marker = new google.maps.Marker({
 		map : map,
-		icon : new google.maps.MarkerImage('img/places/restaurant.png'),
+		icon : new google.maps.MarkerImage('img/places/'+type+'.png',  
+				  		new google.maps.Size(30, 38),
+				  		// The origin for this image is 0,0.
+				  		new google.maps.Point(0,0)
+		),
 		animation: google.maps.Animation.DROP,
 		position : place.geometry.location
 	});
