@@ -154,7 +154,7 @@ function createMarker(place,type) {
 	});
 
 	infowindowplace = new google.maps.InfoWindow({
-		content : "<button onClick='gohere("+place.geometry.location.lat()+
+		content : place.name+"<button onClick='gohere("+place.geometry.location.lat()+
 		","+place.geometry.location.lng()+")'>Go Here</button>"
 	});
 	
