@@ -1,42 +1,16 @@
 var map;
 var markersArray = [];
-var marcador;
-var infowindow;
+var myLocationMarker;
+var myLocationInfoWindow;
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
 var friends = new Array();
 var geocoder;
-var mylocation;
+var myLocation;
 $('#page-map').live(
 		"pagecreate",
 		function() {
-			geocoder = new google.maps.Geocoder();
-			var mylocation = new google.maps.LatLng(43.4609602, -3.8079336);
-			var myOptions = {
-				zoom : 12,
-				center : mylocation,
-				mapTypeId : google.maps.MapTypeId.ROADMAP
-			};
-			map = new google.maps.Map(document.getElementById("map_canvas"),
-					myOptions);
-
-			// var showLocationControlDiv = document.createElement('DIV');
-			// var showLocationControl = new
-			// MyLocationControl(showLocationControlDiv, map);
-			// showLocationControlDiv.index = 1;
-			// map.controls[google.maps.ControlPosition.TOP_RIGHT].push(showLocationControlDiv);
-
-			infowindow = new google.maps.InfoWindow({
-				content : "Me"
-			});
-			marcador = new google.maps.Marker({
-				position : mylocation,
-				map : map
-			})
-			google.maps.event.addListener(marcador, 'click', function() {
-				infowindow.open(map, marcador);
-			});
 			showMyLocation();
-			mapBuddies();
-			mapPlaces();
 		});
 
 /*
@@ -132,11 +106,11 @@ function mapPlaces() {
 
 function addPlaces(type) {
 	var request = {
-		location : mylocation,
+		location : myLocation,
 		radius : 5000,
 		types : [ type ]
 	};
-	infowindow = new google.maps.InfoWindow();
+	//infowindow = new google.maps.InfoWindow();
 	var service = new google.maps.places.PlacesService(map);
 	service.search(request, function addPlacesCallback(results,status){
 		addPlacesCallbackWithType(results,status,type);
@@ -161,6 +135,11 @@ function addPlacesCallbackWithType(results, status,type) {
 	}
 }
 
+function gohere(platitude,plongitude){
+	alert("go here called "+platitude+","+plongitude+" from "+myLocation.lat()+","+myLocation.lng());
+	calcRoute(platitude,plongitude);
+}
+
 function createMarker(place,type) {
 	var placeLoc = place.geometry.location;
 	var marker = new google.maps.Marker({
@@ -173,11 +152,17 @@ function createMarker(place,type) {
 		animation: google.maps.Animation.DROP,
 		position : place.geometry.location
 	});
+
+	infowindowplace = new google.maps.InfoWindow({
+		content : "<button onClick='gohere("+place.geometry.location.lat()+
+		","+place.geometry.location.lng()+")'>Go Here</button>"
+	});
+	
 	// Create a marker
 	// Add the marker to the map
 	google.maps.event.addListener(marker, 'click', function() {
-		infowindow.setContent(place.name);
-		infowindow.open(map, this);
+	//	infowindowplace.setContent(place.name);
+		infowindowplace.open(map,this);
 	});
 	markersArray.push(marker);
 }
@@ -189,16 +174,60 @@ function showMyLocation() {
 }
 
 function onGPSRead(location) {
-	mylocation = new google.maps.LatLng(location.coords.latitude,
+	myLocation = new google.maps.LatLng(location.coords.latitude,
 			location.coords.longitude);
-	map.setCenter(mylocation);
-	marcador.setPosition(mylocation);	
 	localStorage.setItem('latitude',location.coords.latitude);
 	localStorage.setItem('longitude',location.coords.longitude);
+	//Once set up the location, map buddies and places
+	initializeMap();
+	mapBuddies();
+	mapPlaces();
 }
 
-function getIcon(color) {
-    return MapIconMaker.createMarkerIcon({width: 20, height: 34, primaryColor: color, cornercolor:color});
+function calcRoute(destLatitude,destLongitude) {
+    var start = myLocation.lat()+','+myLocation.lng();
+    var end = destLatitude+','+destLongitude;
+    alert("Calc route start: "+start+" end: "+end);
+    var request = {
+        origin:start,
+        destination:end,
+        travelMode: google.maps.DirectionsTravelMode.DRIVING
+    };
+    directionsService.route(request, function(response, status) {
+      if (status == google.maps.DirectionsStatus.OK) {
+    	  alert("status direction OK, setting response to direction Display");
+        directionsDisplay.setDirections(response);
+      }
+    });
+  }
+
+function initializeMap(){
+	alert("initializeMap");
+	geocoder = new google.maps.Geocoder();
+	//myLocation = new google.maps.LatLng(43.4609602, -3.8079336);
+	var myOptions = {
+		zoom : 12,
+		center : myLocation,
+		mapTypeId : google.maps.MapTypeId.ROADMAP
+	};
+	map = new google.maps.Map(document.getElementById("map_canvas"),
+			myOptions);
+
+	myLocationInfoWindow = new google.maps.InfoWindow({
+		content : "Me"
+	});
+	myLocationMarker = new google.maps.Marker({
+		position : myLocation,
+		map : map
+	})
+	google.maps.event.addListener(myLocationMarker, 'click', function() {
+		myLocationInfoWindow.open(map, myLocationMarker);
+	});
+	   directionsDisplay = new google.maps.DirectionsRenderer({
+	        'map': map,
+	        'preserveViewport': true,
+	       // 'draggable': true
+	    });
 }
 
 function onGPSError() {
