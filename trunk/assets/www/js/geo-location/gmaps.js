@@ -10,6 +10,7 @@ var myLocation;
 $('#page-map').live(
 		"pagecreate",
 		function() {
+			alert("Call show My location");
 			showMyLocation();
 		});
 
@@ -35,7 +36,6 @@ $('#page-map').live(
  */
 
 function mapBuddies() {
-	alert("in mapBuddies");
 	var location;
 	var name;
 	var storedData = localStorage.getItem("friends");
@@ -217,17 +217,13 @@ function calcRoute(destLatitude,destLongitude) {
   }
 
 function initializeMap(){
-	alert("initializeMap");
 	geocoder = new google.maps.Geocoder();
-	// myLocation = new google.maps.LatLng(43.4609602, -3.8079336);
 	var myOptions = {
 		zoom : 12,
 		center : myLocation,
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	};
-	map = new google.maps.Map(document.getElementById("map_canvas"),
-			myOptions);
-	
+	map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
 	var results;
 	var status;
 	
@@ -241,6 +237,7 @@ function initializeMap(){
 	myLocationInfoWindow = new google.maps.InfoWindow({
 		content : "Me"+results[0].formatted_address
 	});
+	
 	myLocationMarker = new google.maps.Marker({		
 		position : myLocation,
 		map : map
@@ -248,9 +245,10 @@ function initializeMap(){
 	google.maps.event.addListener(myLocationMarker, 'click', function() {
 		myLocationInfoWindow.open(map, myLocationMarker);
 	});
+	
 	   directionsDisplay = new google.maps.DirectionsRenderer({
-	        'map': myLocation.
-	        'preserveViewport': true,
+	        'map': myLocation,
+	        'preserveViewport': true
 	       // 'draggable': true
 	    });
 }
