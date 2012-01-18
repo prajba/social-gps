@@ -227,11 +227,12 @@ function initializeMap(){
 	};
 	map = new google.maps.Map(document.getElementById("map_canvas"),
 			myOptions);
-
+    var city = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+place.geometry.location.lat()+
+    ","+place.geometry.location.lng()+"&sensor=false";
 	myLocationInfoWindow = new google.maps.InfoWindow({
-		content : "Me"
+		content : "Me"+  "<button onClick=''>Check videos about "+ city.results[i].formatted_address+" </button>"
 	});
-	myLocationMarker = new google.maps.Marker({
+	myLocationMarker = new google.maps.Marker({		
 		position : myLocation,
 		map : map
 	})
@@ -239,7 +240,7 @@ function initializeMap(){
 		myLocationInfoWindow.open(map, myLocationMarker);
 	});
 	   directionsDisplay = new google.maps.DirectionsRenderer({
-	        'map': map,
+	        'map': myLocation.
 	        'preserveViewport': true,
 	       // 'draggable': true
 	    });
