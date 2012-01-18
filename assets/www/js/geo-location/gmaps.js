@@ -227,10 +227,19 @@ function initializeMap(){
 	};
 	map = new google.maps.Map(document.getElementById("map_canvas"),
 			myOptions);
-    var city = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+place.geometry.location.lat()+
-    ","+place.geometry.location.lng()+"&sensor=false";
+	
+	var results;
+	var status;
+	
+	geocoder.geocode({'latLng': myLocation}, function(results, status) {
+	      if (status == google.maps.GeocoderStatus.OK) {
+	        if (results[0]) {
+	          $('#address').val(results[0].formatted_address);
+	        }
+	      }
+	    });
 	myLocationInfoWindow = new google.maps.InfoWindow({
-		content : "Me"+  "<button onClick=''>Check videos about "+ city.results[i].formatted_address+" </button>"
+		content : "Me"+results[0].formatted_address
 	});
 	myLocationMarker = new google.maps.Marker({		
 		position : myLocation,
