@@ -14,47 +14,54 @@ $('#page-map').live(
 		});
 
 /*
- * function MyLocationControl(controlDiv, map) {
- *  // Set CSS styles for the DIV containing the control // Setting padding to 5
- * px will offset the control // from the edge of the map.
- * controlDiv.style.padding = '5px';
- *  // Set CSS for the control border. var controlUI =
- * document.createElement('DIV'); controlUI.style.backgroundColor = 'white';
- * controlUI.style.borderStyle = 'solid'; controlUI.style.borderWidth = '1px';
- * controlUI.style.cursor = 'pointer'; controlUI.style.textAlign = 'center';
- * controlUI.title = 'Click to set the map to your GPS Location';
- * controlDiv.appendChild(controlUI);
- *  // Set CSS for the control interior. var controlText =
+ * function MyLocationControl(controlDiv, map) { // Set CSS styles for the DIV
+ * containing the control // Setting padding to 5 px will offset the control //
+ * from the edge of the map. controlDiv.style.padding = '5px'; // Set CSS for
+ * the control border. var controlUI = document.createElement('DIV');
+ * controlUI.style.backgroundColor = 'white'; controlUI.style.borderStyle =
+ * 'solid'; controlUI.style.borderWidth = '1px'; controlUI.style.cursor =
+ * 'pointer'; controlUI.style.textAlign = 'center'; controlUI.title = 'Click to
+ * set the map to your GPS Location'; controlDiv.appendChild(controlUI); // Set
+ * CSS for the control interior. var controlText =
  * document.createElement('DIV'); controlText.style.fontFamily =
  * 'Arial,sans-serif'; controlText.style.fontSize = '12px';
  * controlText.style.paddingLeft = '4px'; controlText.style.paddingRight =
  * '4px'; controlText.innerHTML = 'Show My Location';
- * controlUI.appendChild(controlText);
- *  // Setup the click event listeners: simply set the map to your gps location
+ * controlUI.appendChild(controlText); // Setup the click event listeners:
+ * simply set the map to your gps location
  * google.maps.event.addDomListener(controlUI, 'click', function() {
  * 
  * }); }
  */
 
 function mapBuddies() {
+	alert("in mapBuddies");
 	var location;
 	var name;
 	var storedData = localStorage.getItem("friends");
 	if (storedData) {
 		listdata = JSON.parse(storedData);
 		var size = listdata.length;
-		// alert(size);
+		
 		var i = 0;
 		var marker = new Array();
 		var infowindow = new Array();
-		for ( var j = 0; j <= size; j++) {
+		for ( var j = 0; j < size; j++) {
 			marker[j] = new google.maps.Marker({
-				map : map
+				map : map,
+				draggable: true
+			});
+			google.maps.event.addListener(marker[j], 'drag', function() {
+			    $("input[name='request']").val(marker[j].getPosition());
+			});
+
+			google.maps.event.addListener(marker[j], 'dragend', function() {
+			    $("input[name='request']").val(marker[j].getPosition());
 			});
 			infowindow[j] = new google.maps.InfoWindow();
-		}
-		;
-		while (i <= size) {
+		};
+		
+		while (i < size) {
 			if (listdata[i] != null) {
 				var friend = JSON.parse(listdata[i]);
 				var name;
@@ -66,13 +73,8 @@ function mapBuddies() {
 				}
 				name = friend.name;
 				i = i + 1;
-				if (location != "-") {
-					// alert(i+", "+name + ";"+ location);
-					geocoder.geocode({
-						address : location
-					}, function(results) {
-						// alert(i+", "+name + "; localitatea: "+ location);
-						marker[i].setPosition(results[0].geometry.location);
+				if (location != "-") {					
+						marker[i].setPosition(myLocation);
 						infowindow[i].setContent(name);
 						infowindow[i].open(map, marker[i]);
 						google.maps.event.addListener(marker[i], 'click',
@@ -81,7 +83,20 @@ function mapBuddies() {
 									infowindow[i].open(map, marker[i]);
 								});
 
-					});
+					//geocoder.geocode({
+					//	address : myLocation
+					//}, function(results) {
+					//	alert(i+", "+name + "; localitatea: "+ location);
+					//	marker[i].setPosition(results[0].geometry.location);
+					//	infowindow[i].setContent(name);
+					//	infowindow[i].open(map, marker[i]);
+					//	google.maps.event.addListener(marker[i], 'click',
+					//			function() {
+					//				infowindow[i].setContent(name);
+					//				infowindow[i].open(map, marker[i]);
+					//			});
+					//
+					//});
 				}
 			}
 		}
@@ -96,9 +111,9 @@ function mapPlaces() {
 	if (storedData) {
 		splitedData = storedData.split('&');
 		for ( var j = 0; j < splitedData.length; j++) {
-			//alert("Iteration "+j);
+			// alert("Iteration "+j);
 			splitedPlaces = splitedData[j].split('=');
-			//alert("SplitedPlaces: "+splitedPlaces[1]);
+			// alert("SplitedPlaces: "+splitedPlaces[1]);
 			addPlaces(splitedPlaces[1]);
 		}
 	}
@@ -110,7 +125,7 @@ function addPlaces(type) {
 		radius : 5000,
 		types : [ type ]
 	};
-	//infowindow = new google.maps.InfoWindow();
+	// infowindow = new google.maps.InfoWindow();
 	var service = new google.maps.places.PlacesService(map);
 	service.search(request, function addPlacesCallback(results,status){
 		addPlacesCallbackWithType(results,status,type);
@@ -125,8 +140,8 @@ function clearMarkers(){
 		    markersArray.length = 0;
 	  }
 }
-//TODO put an argument in callback so marker will be loaded
-//with the image.png when image=type of place loaded
+// TODO put an argument in callback so marker will be loaded
+// with the image.png when image=type of place loaded
 function addPlacesCallbackWithType(results, status,type) {
 	if (status == google.maps.places.PlacesServiceStatus.OK) {
 		for ( var i = 0; i < results.length; i++) {
@@ -154,14 +169,14 @@ function createMarker(place,type) {
 	});
 
 	infowindowplace = new google.maps.InfoWindow({
-		content : place.name+"<button onClick='gohere("+place.geometry.location.lat()+
+		content : "<button onClick='gohere("+place.geometry.location.lat()+
 		","+place.geometry.location.lng()+")'>Go Here</button>"
 	});
 	
 	// Create a marker
 	// Add the marker to the map
 	google.maps.event.addListener(marker, 'click', function() {
-	//	infowindowplace.setContent(place.name);
+	// infowindowplace.setContent(place.name);
 		infowindowplace.open(map,this);
 	});
 	markersArray.push(marker);
@@ -178,7 +193,7 @@ function onGPSRead(location) {
 			location.coords.longitude);
 	localStorage.setItem('latitude',location.coords.latitude);
 	localStorage.setItem('longitude',location.coords.longitude);
-	//Once set up the location, map buddies and places
+	// Once set up the location, map buddies and places
 	initializeMap();
 	mapBuddies();
 	mapPlaces();
@@ -204,7 +219,7 @@ function calcRoute(destLatitude,destLongitude) {
 function initializeMap(){
 	alert("initializeMap");
 	geocoder = new google.maps.Geocoder();
-	//myLocation = new google.maps.LatLng(43.4609602, -3.8079336);
+	// myLocation = new google.maps.LatLng(43.4609602, -3.8079336);
 	var myOptions = {
 		zoom : 12,
 		center : myLocation,
