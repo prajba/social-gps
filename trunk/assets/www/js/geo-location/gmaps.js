@@ -10,7 +10,6 @@ var myLocation;
 $('#page-map').live(
 		"pagecreate",
 		function() {
-			alert("Call show My location");
 			showMyLocation();
 		});
 
