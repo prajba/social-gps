@@ -3,8 +3,7 @@
 		window.location.href = url;
   }
   
-  
   function mobileChangePage(Url){
-	  alert("Call MobileChangepage to "+Url)
+//	  alert("Call MobileChangepage to "+Url)
 	  $.mobile.changePage( Url, { transition: "slide"} );
   }
