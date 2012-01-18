@@ -234,13 +234,19 @@ function initializeMap(){
 	      }
 	    });
 	myLocationInfoWindow = new google.maps.InfoWindow({
-		content : "Me"+results[0].formatted_address
+		content : "Me"//+results[0].formatted_address
 	});
 	
 	myLocationMarker = new google.maps.Marker({		
-		position : myLocation,
-		map : map
-	})
+		map : map,
+		icon : new google.maps.MarkerImage('img/smiley_happy.png',  
+		  		new google.maps.Size(30, 38),
+		  		// The origin for this image is 0,0.
+		  		new google.maps.Point(0,0)),
+		animation: google.maps.Animation.DROP,
+		position : myLocation
+	});
+	
 	google.maps.event.addListener(myLocationMarker, 'click', function() {
 		myLocationInfoWindow.open(map, myLocationMarker);
 	});
