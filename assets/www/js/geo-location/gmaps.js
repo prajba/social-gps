@@ -11,11 +11,7 @@ var myLocationAddress;
 $('#page-map').live(
 		"pagecreate",
 		function() {
-			showMyLocation();
-			
-				var t=setTimeout("updateMyLocation()",15000);
-	
-			
+			showMyLocation();	
 		});
 
 /*
@@ -183,34 +179,11 @@ function showMyLocation() {
 	navigator.geolocation.getCurrentPosition(onGPSRead, onGPSError, {
 		enableHighAccuracy : true
 	})
+	//Every 15 sec location will be updated. e.g we are on the move
+	setTimeout("showMyLocation()",15000);
 }
 
-function updateMyLocation() {
-	navigator.geolocation.getCurrentPosition(onGPSRead_Update, onGPSError, {
-		enableHighAccuracy : true
-	});
-	setTimeout("updateMyLocation()",15000);
-}
-function onGPSRead_Update(location) {
-	myLocation = new google.maps.LatLng(location.coords.latitude,
-			location.coords.longitude);
-	localStorage.setItem('latitude',location.coords.latitude);
-	localStorage.setItem('longitude',location.coords.longitude);
-	var results;
-	var status;	
-	geocoder.geocode({'latLng': myLocation}, function(results, status) {
-	      if (status == google.maps.GeocoderStatus.OK && results[0]) {
-	         // $('#address').val(results[0].formatted_address); What is this $(#address)?
-	    	  myLocationAddress=results[0].formatted_address;
-	      }else{
-	    	  myLocationAddress="ME";
-	      }
-	      //address to localStorage
-	  	  localStorage.setItem('address',myLocationAddress);
-	  	  // Once set up the location, map buddies and places
-	});
-	setUpMyLocationInfoWindow();
-}
+
 function onGPSRead(location) {
 	myLocation = new google.maps.LatLng(location.coords.latitude,
 			location.coords.longitude);
@@ -218,7 +191,9 @@ function onGPSRead(location) {
 	localStorage.setItem('longitude',location.coords.longitude);
 	var results;
 	var status;	
-	geocoder = new google.maps.Geocoder();
+	if(!geocoder){
+		geocoder = new google.maps.Geocoder();
+	}
 	geocoder.geocode({'latLng': myLocation}, function(results, status) {
 	      if (status == google.maps.GeocoderStatus.OK && results[0]) {
 	         // $('#address').val(results[0].formatted_address); What is this $(#address)?
@@ -229,8 +204,11 @@ function onGPSRead(location) {
 	      //address to localStorage
 	  	  localStorage.setItem('address',myLocationAddress);
 	  	  // Once set up the location, map buddies and places
-	  	  initializeMap();
-	  	  mapBuddies();
+	  	  if(!map){
+	  		  initializeMap();
+	  		  mapBuddies();
+	  	  }
+	  	  setUpMyLocationInfoWindow();
 	});
 }
 
@@ -287,7 +265,6 @@ function initializeMap(){
         'draggable': true,
         'suppressMarkers': true
     });
-	setUpMyLocationInfoWindow();
 }
 
 function onGPSError() {
