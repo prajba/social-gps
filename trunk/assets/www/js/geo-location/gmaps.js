@@ -3,10 +3,11 @@ var markersArray = [];
 var myLocationMarker;
 var myLocationInfoWindow;
 var directionsDisplay;
-var directionsService = new google.maps.DirectionsService();
+var directionsService;
 var friends = new Array();
 var geocoder;
 var myLocation;
+var myLocationAddress;
 $('#page-map').live(
 		"pagecreate",
 		function() {
@@ -139,8 +140,7 @@ function clearMarkers(){
 		    markersArray.length = 0;
 	  }
 }
-// TODO put an argument in callback so marker will be loaded
-// with the image.png when image=type of place loaded
+
 function addPlacesCallbackWithType(results, status,type) {
 	if (status == google.maps.places.PlacesServiceStatus.OK) {
 		for ( var i = 0; i < results.length; i++) {
@@ -192,10 +192,23 @@ function onGPSRead(location) {
 			location.coords.longitude);
 	localStorage.setItem('latitude',location.coords.latitude);
 	localStorage.setItem('longitude',location.coords.longitude);
-	// Once set up the location, map buddies and places
-	initializeMap();
-	mapBuddies();
-	mapPlaces();
+	var results;
+	var status;	
+	geocoder = new google.maps.Geocoder();
+	geocoder.geocode({'latLng': myLocation}, function(results, status) {
+	      if (status == google.maps.GeocoderStatus.OK && results[0]) {
+	         // $('#address').val(results[0].formatted_address); What is this $(#address)?
+	    	  myLocationAddress=results[0].formatted_address;
+	      }else{
+	    	  myLocationAddress="ME";
+	      }
+	      //address to localStorage
+	  	  localStorage.setItem('address',myLocationAddress);
+	  	  // Once set up the location, map buddies and places
+	  	  initializeMap();
+	  	  mapBuddies();
+	  	  mapPlaces();
+	});
 }
 
 function calcRoute(destLatitude,destLongitude) {
@@ -215,10 +228,9 @@ function calcRoute(destLatitude,destLongitude) {
     });
   }
 
-function setUpMyLocationInfoWindow(geocoderLocation){
-	alert("SetUpMyLocationInfoWindow: "+geocoderLocation);
+function setUpMyLocationInfoWindow(){
 	myLocationInfoWindow = new google.maps.InfoWindow();
-	myLocationInfoWindow.setContent(geocoderLocation);
+	myLocationInfoWindow.setContent("I'm here: "+myLocationAddress);
 	myLocationMarker = new google.maps.Marker({		
 		map : map,
 		icon : new google.maps.MarkerImage('img/smiley_happy.png',  
@@ -232,31 +244,22 @@ function setUpMyLocationInfoWindow(geocoderLocation){
 		myLocationInfoWindow.open(map, myLocationMarker);
 	});
 }
+
 function initializeMap(){
-	geocoder = new google.maps.Geocoder();
 	var myOptions = {
 		zoom : 12,
 		center : myLocation,
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	};
 	map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
-	var results;
-	var status;	
-	geocoder.geocode({'latLng': myLocation}, function(results, status) {
-	      if (status == google.maps.GeocoderStatus.OK && results[0]) {
-	      	  alert('GeoCode Result '+results[0].formatted_address.toString());
-	         // $('#address').val(results[0].formatted_address); What is this $(#address)?
-	      	  setUpMyLocationInfoWindow("Here I am: "+results[0].formatted_address);
-	      }else{
-	          setUpMyLocationInfoWindow('ME');
-	      }
-	});
-	
+	directionsService=new google.maps.DirectionsService();
 	directionsDisplay = new google.maps.DirectionsRenderer({
-	    'map': myLocation,
-	    'preserveViewport': true
-	  //'draggable': true
-	});
+        'map': map,
+        'preserveViewport': true,
+        'draggable': true,
+        'suppressMarkers': true
+    });
+	setUpMyLocationInfoWindow();
 }
 
 function onGPSError() {
