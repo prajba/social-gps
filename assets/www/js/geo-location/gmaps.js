@@ -215,6 +215,23 @@ function calcRoute(destLatitude,destLongitude) {
     });
   }
 
+function setUpMyLocationInfoWindow(geocoderLocation){
+	alert("SetUpMyLocationInfoWindow: "+geocoderLocation);
+	myLocationInfoWindow = new google.maps.InfoWindow();
+	myLocationInfoWindow.setContent(geocoderLocation);
+	myLocationMarker = new google.maps.Marker({		
+		map : map,
+		icon : new google.maps.MarkerImage('img/smiley_happy.png',  
+		  		new google.maps.Size(30, 38),
+		  		// The origin for this image is 0,0.
+		  		new google.maps.Point(0,0)),
+		animation: google.maps.Animation.DROP,
+		position : myLocation
+	});	
+	google.maps.event.addListener(myLocationMarker, 'click', function() {
+		myLocationInfoWindow.open(map, myLocationMarker);
+	});
+}
 function initializeMap(){
 	geocoder = new google.maps.Geocoder();
 	var myOptions = {
@@ -224,38 +241,22 @@ function initializeMap(){
 	};
 	map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
 	var results;
-	var status;
-	
+	var status;	
 	geocoder.geocode({'latLng': myLocation}, function(results, status) {
-	      if (status == google.maps.GeocoderStatus.OK) {
-	        if (results[0]) {
-	          $('#address').val(results[0].formatted_address);
-	        }
+	      if (status == google.maps.GeocoderStatus.OK && results[0]) {
+	      	  alert('GeoCode Result '+results[0].formatted_address.toString());
+	         // $('#address').val(results[0].formatted_address); What is this $(#address)?
+	      	  setUpMyLocationInfoWindow("Here I am: "+results[0].formatted_address);
+	      }else{
+	          setUpMyLocationInfoWindow('ME');
 	      }
-	    });
-	myLocationInfoWindow = new google.maps.InfoWindow({
-		content : "Me"//+results[0].formatted_address
 	});
 	
-	myLocationMarker = new google.maps.Marker({		
-		map : map,
-		icon : new google.maps.MarkerImage('img/smiley_happy.png',  
-		  		new google.maps.Size(30, 38),
-		  		// The origin for this image is 0,0.
-		  		new google.maps.Point(0,0)),
-		animation: google.maps.Animation.DROP,
-		position : myLocation
+	directionsDisplay = new google.maps.DirectionsRenderer({
+	    'map': myLocation,
+	    'preserveViewport': true
+	  //'draggable': true
 	});
-	
-	google.maps.event.addListener(myLocationMarker, 'click', function() {
-		myLocationInfoWindow.open(map, myLocationMarker);
-	});
-	
-	   directionsDisplay = new google.maps.DirectionsRenderer({
-	        'map': myLocation,
-	        'preserveViewport': true
-	       // 'draggable': true
-	    });
 }
 
 function onGPSError() {
