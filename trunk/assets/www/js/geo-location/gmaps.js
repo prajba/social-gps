@@ -150,7 +150,6 @@ function addPlacesCallbackWithType(results, status,type) {
 }
 
 function gohere(platitude,plongitude){
-	alert("go here called "+platitude+","+plongitude+" from "+myLocation.lat()+","+myLocation.lng());
 	calcRoute(platitude,plongitude);
 }
 
@@ -166,16 +165,12 @@ function createMarker(place,type) {
 		animation: google.maps.Animation.DROP,
 		position : place.geometry.location
 	});
-
-	infowindowplace = new google.maps.InfoWindow({
-		content : "<button onClick='gohere("+place.geometry.location.lat()+
-		","+place.geometry.location.lng()+")'>Go Here</button>"
-	});
 	
-	// Create a marker
-	// Add the marker to the map
+	infowindowplace = new google.maps.InfoWindow();
+
 	google.maps.event.addListener(marker, 'click', function() {
-	// infowindowplace.setContent(place.name);
+	   infowindowplace.setContent("<b>"+place.name+"</b></br>"+
+			   "<button onClick='gohere("+placeLoc.lat()+","+placeLoc.lng()+")'>Go Here</button>");
 		infowindowplace.open(map,this);
 	});
 	markersArray.push(marker);
@@ -207,14 +202,12 @@ function onGPSRead(location) {
 	  	  // Once set up the location, map buddies and places
 	  	  initializeMap();
 	  	  mapBuddies();
-	  	  mapPlaces();
 	});
 }
 
 function calcRoute(destLatitude,destLongitude) {
     var start = myLocation.lat()+','+myLocation.lng();
     var end = destLatitude+','+destLongitude;
-    alert("Calc route start: "+start+" end: "+end);
     var request = {
         origin:start,
         destination:end,
@@ -222,7 +215,6 @@ function calcRoute(destLatitude,destLongitude) {
     };
     directionsService.route(request, function(response, status) {
       if (status == google.maps.DirectionsStatus.OK) {
-    	  alert("status direction OK, setting response to direction Display");
         directionsDisplay.setDirections(response);
       }
     });
