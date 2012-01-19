@@ -12,6 +12,10 @@ $('#page-map').live(
 		"pagecreate",
 		function() {
 			showMyLocation();
+			
+				var t=setTimeout("updateMyLocation()",15000);
+	
+			
 		});
 
 /*
@@ -34,7 +38,6 @@ $('#page-map').live(
  * 
  * }); }
  */
-
 function mapBuddies() {
 	var location;
 	var name;
@@ -182,6 +185,32 @@ function showMyLocation() {
 	})
 }
 
+function updateMyLocation() {
+	navigator.geolocation.getCurrentPosition(onGPSRead_Update, onGPSError, {
+		enableHighAccuracy : true
+	});
+	setTimeout("updateMyLocation()",15000);
+}
+function onGPSRead_Update(location) {
+	myLocation = new google.maps.LatLng(location.coords.latitude,
+			location.coords.longitude);
+	localStorage.setItem('latitude',location.coords.latitude);
+	localStorage.setItem('longitude',location.coords.longitude);
+	var results;
+	var status;	
+	geocoder.geocode({'latLng': myLocation}, function(results, status) {
+	      if (status == google.maps.GeocoderStatus.OK && results[0]) {
+	         // $('#address').val(results[0].formatted_address); What is this $(#address)?
+	    	  myLocationAddress=results[0].formatted_address;
+	      }else{
+	    	  myLocationAddress="ME";
+	      }
+	      //address to localStorage
+	  	  localStorage.setItem('address',myLocationAddress);
+	  	  // Once set up the location, map buddies and places
+	});
+	setUpMyLocationInfoWindow();
+}
 function onGPSRead(location) {
 	myLocation = new google.maps.LatLng(location.coords.latitude,
 			location.coords.longitude);
@@ -221,20 +250,27 @@ function calcRoute(destLatitude,destLongitude) {
   }
 
 function setUpMyLocationInfoWindow(){
-	myLocationInfoWindow = new google.maps.InfoWindow();
+	if(!myLocationInfoWindow){
+		myLocationInfoWindow = new google.maps.InfoWindow();
+	}
 	myLocationInfoWindow.setContent("I'm here: "+myLocationAddress);
-	myLocationMarker = new google.maps.Marker({		
-		map : map,
-		icon : new google.maps.MarkerImage('img/smiley_happy.png',  
-		  		new google.maps.Size(30, 38),
-		  		// The origin for this image is 0,0.
-		  		new google.maps.Point(0,0)),
-		animation: google.maps.Animation.DROP,
-		position : myLocation
-	});	
-	google.maps.event.addListener(myLocationMarker, 'click', function() {
-		myLocationInfoWindow.open(map, myLocationMarker);
-	});
+	if(!myLocationMarker){
+		myLocationMarker = new google.maps.Marker({		
+			map : map,
+			icon : new google.maps.MarkerImage('img/smiley_happy.png',  
+					new google.maps.Size(30, 38),
+					// The origin for this image is 0,0.
+					new google.maps.Point(0,0)),
+					//animation: google.maps.Animation.DROP,
+					position : myLocation
+		});	
+		google.maps.event.addListener(myLocationMarker, 'click', function() {
+			myLocationInfoWindow.open(map, myLocationMarker);
+		});
+	}else{
+		//For the second, third, and so on call to this function, just update position of the marker
+		myLocationMarker.position(myLocation);
+	}
 }
 
 function initializeMap(){
