@@ -8,13 +8,15 @@ function searchClicked()
             document.getElementById("videoResultsDiv").innerHTML = 
                                     'Loading YouTube videos ...';
 
+            var address = localStorage.getItem("address");
+        	var addresses = address.split(",");
             var city="Linz";
             //create a JavaScript element that returns our JSON data.
             var script = document.createElement('script');
             script.setAttribute('id', 'jsonScript');
             script.setAttribute('type', 'text/javascript');
             script.setAttribute('src', 'http://gdata.youtube.com/feeds/' + 
-                   'videos?vq=' + city + '&max-results=5&' + 
+                   'videos?vq=' + addresses[1] + '&max-results=5&' + 
                    'alt=json-in-script&callback=showMyVideos&' + 
                    'orderby=relevance&sortorder=descending&format=5');
 
@@ -41,7 +43,7 @@ function searchClicked()
 
                  var lnk = "http://www.youtube.com/embed/"+videoId;
                 	 
-                 html.push('<div data-role="fieldcontain"><p>',title,videoId,'<\p><iframe class="youtube-player" type="text/html" width="640" height="385" frameborder="0" id="',id,'" src="',lnk,'"></iframe></div>');
+                 html.push('<div data-role="fieldcontain"><p>',title,'<\p><iframe class="youtube-player" type="text/html" width="640" height="385" frameborder="0" id="',id,'" src="',lnk,'"></iframe></div>');
                  document.getElementById('videoResultsDiv').innerHTML = html.join('');
      				// this sets the id of the object or embed tag to 'myytplayer'.
      				// You then use this id to access the swf and make calls to the player's API 
