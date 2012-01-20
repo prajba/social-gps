@@ -8,17 +8,19 @@ function searchClicked()
             document.getElementById("videoResultsDiv").innerHTML = 
                                     'Loading YouTube videos ...';
 
+            var category="Travel";
             var address = localStorage.getItem("address");
         	var addresses = address.split(",");
-            var city="Linz";
+        	var city = addresses[1].replace(/[0-9]/g, "");
             //create a JavaScript element that returns our JSON data.
             var script = document.createElement('script');
             script.setAttribute('id', 'jsonScript');
             script.setAttribute('type', 'text/javascript');
             script.setAttribute('src', 'http://gdata.youtube.com/feeds/' + 
-                   'videos?vq=' + addresses[1] + '&max-results=5&' + 
+                   'videos?vq=' + city + '&max-results=5&' + 
                    'alt=json-in-script&callback=showMyVideos&' + 
-                   'orderby=relevance&sortorder=descending&format=5');
+                   'orderby=relevance&sortorder=descending&category='
+                   + category +'&format=5');
 
             //attach script to current page -  this will submit asynchronous
             //search request, and when the results come back callback 
