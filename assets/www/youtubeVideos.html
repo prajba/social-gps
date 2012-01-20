@@ -1,68 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<title>Related Videos</title>
-
-<link href="css/facebook-css/style.css" rel="stylesheet" />
-<link rel="stylesheet" href="css/facebook-css/facebook.css" />
-<link rel="stylesheet" type="text/css" href="style.css" />
-<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/redmond/jquery-ui.css" />
-<link href="js/common/jquery-mobile/jquery.mobile-1.0.min.css"
-	rel="stylesheet" type="text/css" />
-<link href="js/common/jquery-mobile/jquery.mobile.structure-1.0.min.css"
-	rel="stylesheet" type="text/css" />
-	<script src="js/common/jquery-mobile/jquery-1.7.1.js"
-	type="text/javascript"></script>
-<script src="js/common/jquery-mobile/jquery.mobile-1.0.min.js"
-	type="text/javascript"></script>
-
-<script type="text/javascript" charset="utf-8"
-	src="js/youtube-connection/jQtube.js"></script>
-
-</head>
-<body> 	
-<div data-role="page" class="videos"  id="videos" data-theme="e"
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Related Videos</title>
+		<link href="css/facebook-css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/facebook-css/facebook.css" />
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/redmond/jquery-ui.css" />
+		<link href="js/common/jquery-mobile/jquery.mobile-1.0.min.css"
+		rel="stylesheet" type="text/css" />
+		<link href="js/common/jquery-mobile/jquery.mobile.structure-1.0.min.css"
+		rel="stylesheet" type="text/css" />
+		<link href="js/common/jquery-mobile/jquery.videoplayer.css"
+		rel="stylesheet" type="text/css" />
+		<script src="js/common/jquery-mobile/jquery-1.7.1.js"
+		type="text/javascript"></script>
+		<script src="js/common/jquery-mobile/jquery.mobile-1.0.min.js"
+		type="text/javascript"></script>
+		<script type="text/javascript" charset="utf-8"
+		src="js/youtube-connection/jQtube.js"></script>
+		<script type="text/javascript" src="https://www.google.com/jsapi?key=AIzaSyAsl9yODaiNyShVLlpjiNYAoSagn2rpAi8"></script>		
+		<script type="text/javascript" charset="utf-8" src="js/common/phonegap-1.2.0.js"></script>
+		
+	</head>
+	<body id="page" onload="searchClicked()">
+		<div data-role="page" class="videos"  id="videos" data-theme="e"
 		data-add-back-btn="true">
-		<div data-role="header" data-position="inline" class="header-socgps">
-			<h1>Check Videos</h1>
-		</div>
-
-<div data-role="content" class="content-friends">
-	  
-<div  data-role="collapsible-set"  data-content-theme="c">
-<div data-role="collapsible" data-theme="e" data-content-theme="d">
-<h3><a href="#">Show those:</a></h3>
-	<div data-role="fieldcontain">        
-          	 <select style="text-align:left;" id="videoParams" multiple="multiple" data-native-menu="false">
-			 		  <option>Choose options</option>
-          	 		 <option value="popular">Most popular</option>
-          	 		 <option value="viewed">Most viewed</option>
-          	 		 <option value="rated">Top rated</option>
-          	 		 <option value="all">All</option>
-          	 </select>
-       
-	</div>
-</div>
-
-</div>
-
-
-</div>
-
-
-<div data-role="footer" class="footer-friends">
-</div>
-	
-<br>
-	 <a  data-role="button" data-icon="check" data-iconpos="right"  href="index.html#page-map">
-      Show Map
-	</a>&nbsp;&nbsp;&nbsp;&nbsp;
-	
-
-<script type="text/javascript" src="js/check-friends-controller/checkfriends.js"></script>
-
-
-</body>
+			<div data-role="header" data-position="inline" class="header-socgps">
+				<h1>Check Videos</h1>
+			</div>
+			<div>
+				<h1>Results:</h1>
+				<br/>
+				<div id="videoResultsDiv"></div>
+				<!-- ShowMyVideos() will populate this div with results-->
+			</div>
+			<div data-role="footer" class="footer-friends"></div>
+			<br>
+			<a  data-role="button" data-icon="check" data-iconpos="right"  href="index.html#page-map"> Show Map </a>&nbsp;&nbsp;&nbsp;&nbsp; <script type="text/javascript" src="js/check-friends-controller/checkfriends.js"></script>
+	</body>
 </html>
