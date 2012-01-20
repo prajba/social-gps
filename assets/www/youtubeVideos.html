@@ -21,22 +21,28 @@
 		src="js/youtube-connection/jQtube.js"></script>
 		<script type="text/javascript" src="https://www.google.com/jsapi?key=AIzaSyAsl9yODaiNyShVLlpjiNYAoSagn2rpAi8"></script>		
 		<script type="text/javascript" charset="utf-8" src="js/common/phonegap-1.2.0.js"></script>
-		
+		<script type="text/javascript" charset="utf-8"
+	src="js/common/socialGPSUtil.js"></script>
 	</head>
-	<body id="page" onload="searchClicked()">
-		<div data-role="page" class="videos"  id="videos" data-theme="e"
+	<body>
+		<div data-role="page" class="page-videos"  id="page-videos" data-theme="e"
 		data-add-back-btn="true">
 			<div data-role="header" data-position="inline" class="header-socgps">
 				<h1>Check Videos</h1>
 			</div>
-			<div>
+			
+			<div data-role="content" class="content-videos">
 				<h1>Results:</h1>
 				<br/>
 				<div id="videoResultsDiv"></div>
 				<!-- ShowMyVideos() will populate this div with results-->
 			</div>
-			<div data-role="footer" class="footer-friends"></div>
-			<br>
-			<a  data-role="button" data-icon="check" data-iconpos="right"  href="index.html#page-map"> Show Map </a>&nbsp;&nbsp;&nbsp;&nbsp; <script type="text/javascript" src="js/check-friends-controller/checkfriends.js"></script>
+			<div data-role="footer" class="footer-friends">
+					<div data-role=controlgroup
+				style="font-size: 1em; margin-left: auto; margin-right: auto; width: 100%; text-align: center;">
+			<button onClick="mobileChangePage('index.html#page-map')">Show Map</button>
+			</div>
+		</div>
+		</div>
 	</body>
 </html>

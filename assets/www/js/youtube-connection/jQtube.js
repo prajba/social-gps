@@ -1,4 +1,8 @@
-
+$('#page-videos').live(
+		"pagecreate",
+		function() {
+			searchClicked();	
+		});
 function searchClicked()
         {
             document.getElementById("videoResultsDiv").innerHTML = 
