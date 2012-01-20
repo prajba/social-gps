@@ -32,14 +32,18 @@ function searchClicked()
                  var entry = entries[i];
                  var id ="myytplayer"+i;
                  var title = entry.title.$t;
-                 var lnk = entry.link[0].href;
-                 html.push('<div data-role="fieldcontain"><p>',title,'<\p><embed id="',id,'" src="',lnk,'" width="300" height="199"></embed></div>');
+                 var videoId= entry.id.$t;
+                 videoId=videoId.replace("http://gdata.youtube.com/feeds/videos/","");
+
+                 var lnk = "http://www.youtube.com/embed/"+videoId;
+                	 
+                 html.push('<div data-role="fieldcontain"><p>',title,videoId,'<\p><iframe class="youtube-player" type="text/html" width="640" height="385" frameborder="0" id="',id,'" src="',lnk,'"></iframe></div>');
                  document.getElementById('videoResultsDiv').innerHTML = html.join('');
      				// this sets the id of the object or embed tag to 'myytplayer'.
-     				// You then use this id to access the swf and make calls to the player's API     				
-                
+     				// You then use this id to access the swf and make calls to the player's API 
+                 
+                 //http://www.youtube.com/watch?v=K4SA0lw7Ffg&feature=youtube_gdata
              }
-             
         }
         
         
