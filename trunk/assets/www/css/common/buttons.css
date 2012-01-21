@@ -38,3 +38,21 @@
             margin-bottom: 10px;
             width: 300px;
         }
+
+.wiki_button{
+      border-style: none;
+      background-image: url('wikipedia-icon.png');
+      background-repeat: no-repeat;
+      background-size:100% 100%;
+      width: 40px;
+      height: 40px;
+}
+
+.youtube_button{
+      border-style: none;
+      background-image: url('youtube_icon.png');
+      background-repeat: no-repeat;
+      background-size:100% 100%;
+      width: 40px;
+      height: 40px;
+}

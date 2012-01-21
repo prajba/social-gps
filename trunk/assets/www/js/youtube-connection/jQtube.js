@@ -53,7 +53,8 @@ function searchClicked()
                              'alt=json-in-script&callback=showMyVideos&' + 
                              'orderby=relevance&sortorder=descending&category='
                              + category +'&format=5');
-                 }
+                 }           	 
+            	 
         	}
         	
         	

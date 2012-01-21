@@ -160,8 +160,8 @@ function createMarker(place,type) {
 	google.maps.event.addListener(marker, 'click', function() {
 		alert(place.vicinity);
 	   infowindowplace.setContent("<b>"+place.name+"</b></br>"+
-			   "<button onClick='gohere("+placeLoc.lat()+","+placeLoc.lng()+")'>Go Here</button>" +
-			   "<button onClick='goVideos("+placeLoc.lat()+","+placeLoc.lng()+","+'"'+place.name+'"'+")'>Videos</button>");
+			   '<div style="text-align: center;" ><button style="height: 40px;" onClick=gohere('+placeLoc.lat()+","+placeLoc.lng()+")'>Go Here</button>" +
+			   '<button class="youtube_button" onClick=goVideos('+placeLoc.lat()+","+placeLoc.lng()+","+'"'+place.name+'"'+")'</button></div>");
 		infowindowplace.open(map,this);
 	});
 	markersArray.push(marker);
@@ -241,8 +241,8 @@ function setUpMyLocationInfoWindow(){
 		myLocationInfoWindow = new google.maps.InfoWindow();
 	}
 	myLocationInfoWindow.setContent("I'm here: "+myLocationAddress+
-			   '<button onClick=mobileChangePage("youtubeVideos.html")>Videos</button>' +
-			   '<button onClick=mobileChangePage("wikiPlace.html")>Wikipedia</button>');
+			   '<div style="text-align: center;" ><button class="youtube_button" onClick=mobileChangePage("youtubeVideos.html")></button>' +
+			   '<button class="wiki_button" onClick=mobileChangePage("wikiPlace.html")></button></div>');
 	if(!myLocationMarker){
 		myLocationMarker = new google.maps.Marker({		
 			map : map,
