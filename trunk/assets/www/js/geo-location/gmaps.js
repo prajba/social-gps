@@ -261,7 +261,7 @@ function setUpMyLocationInfoWindow(){
 
 function initializeMap(){
 	var myOptions = {
-		zoom : 12,
+		zoom : 15,
 		center : myLocation,
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	};
