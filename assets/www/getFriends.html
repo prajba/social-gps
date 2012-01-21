@@ -61,7 +61,22 @@ $( ".getFriends" ).bind( "click", function(event, ui) {
 			
 				   <select style="text-align:left;" name="friends" id="friends" multiple="multiple" data-native-menu="false">
 						    <option>Choose friends</option>			
-				   </select>				
+				   </select>	
+ <script>
+					//Event on select places changes.
+					$("select#friends").bind("change", function(event, ui) {
+						saveFriendsToLocalStorage();
+						//populateFriendsSelect();
+					});
+					/*$("select#friends" ).selectmenu({
+					   		create: function(event, ui) { 
+					   			alert("in open");
+					   			populateFriendsSelect();
+					   		}
+						});
+						*/
+					</script>	
+							
 		   </div>
 </div>
 </div>

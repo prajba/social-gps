@@ -88,7 +88,7 @@ function getFriends_FB() {
 		loginFacebook();
 	}
 
-	document.getElementById("status").innerHTML = "Now loading your friends' location...Please wait!";
+	document.getElementById("status").innerHTML = "Please wait...";
 
 	// if the person is loggedIn
 	if (loggedIn) {
@@ -97,16 +97,47 @@ function getFriends_FB() {
 				.api(
 						"/me/friends?fields=id,name,gender,languages,picture,location,birthday,work,education",
 						function(response) {
-							friends = response["data"];
-							// localStorage.setItem("friends",JSON.stringify(friends));
-							totalToBeLoaded = friends.length;
-							// addNewRow("Name", "Location");
+							friends = response["data"];							
+							totalToBeLoaded = friends.length;							
 							loadLocation(0);							
 						});
 
 	}
 
 }
+
+
+
+
+
+//saves the selected friends from the select menu to localStorage
+function saveFriendsToLocalStorage() {
+	var friends = $('#friends').serialize();
+	localStorage.setItem("selectedfriends", friends);
+	var storedData = localStorage.getItem("selectedfriends");
+}
+
+function populateFriendsSelect() {
+	var storedData = localStorage.getItem("selectedfriends");	
+	if (storedData) {		
+		splitedData = storedData.split('&');
+		for ( var j = 0; j < splitedData.length; j++) {			
+			splitedFriends = splitedData[j].split('=');			
+			addFriends(splitedFriends[1]);
+		}
+	}
+}
+
+function addFriends(name) {
+	alert(name +" "+ localStorage.getItem("address"));
+	var options = '<option selected="selected" value="' + name + '">' + name
+			+ '</option>';
+	alert(name, localStorage.getItem("address"));
+	$("select#friends").append(options);
+	$("select#friends").selectmenu("refresh");
+}
+
+
 
 function refreshFriendSelect(){
 	var name;
@@ -131,12 +162,16 @@ function refreshFriendSelect(){
 var real = 0;
 var localFriends = new Array();
 // load the images one at a time
-function loadLocation(friendNumber) {
-	var currentLocation = "Hagenberg";// localStorage.getItem("location");
+function loadLocation(friendNumber) {	
+	var currentLocation =  localStorage.getItem("address");// localStorage.getItem("location");		
+	//alert(currentLocation);
 	FB.api("/" + friends[friendNumber].id, function(response) {
 		var out = "";
-		if (response.location != null) {
-			if (response.location["name"].indexOf(currentLocation) != -1) {
+		if (response.location != null) {		
+
+//			if (currentLocation.indexOf(response.location["name"]) != -1) {
+			if ((response.location["name"].indexOf(currentLocation) != -1) || (currentLocation.indexOf(response.location["name"]) != -1)) {
+			//alert("in here");
 				if (response.location["name"] != 'undefined') {
 					localFriends[real] = JSON.stringify(response);
 					//alert(response.work.location+ " "+ response.work.position + response.email);
@@ -161,7 +196,7 @@ function loadLocation(friendNumber) {
 		loadLocation(friendLoaded);
 	});
 	if (friendNumber == totalToBeLoaded - 1) {
-		document.getElementById("status").innerHTML = "Loaded all yours nearby friends' profile images...";
+		document.getElementById("status").innerHTML = "Done!";
 	}
 }
 

@@ -38,29 +38,28 @@ function mapBuddies() {
 	var location;
 	var name;
 	var storedData = localStorage.getItem("friends");
+	alert(storedData);
 	if (storedData) {
 		listdata = JSON.parse(storedData);
 		var size = listdata.length;
-		
 		var i = 0;
 		var marker = new Array();
 		var infowindow = new Array();
 		for ( var j = 0; j < size; j++) {
 			marker[j] = new google.maps.Marker({
 				map : map,
-				draggable: true
+				draggable : true
 			});
 			google.maps.event.addListener(marker[j], 'drag', function() {
-			    $("input[name='request']").val(marker[j].getPosition());
+				$("input[name='request']").val(marker[j].getPosition());
 			});
-
 			google.maps.event.addListener(marker[j], 'dragend', function() {
-			    $("input[name='request']").val(marker[j].getPosition());
+				$("input[name='request']").val(marker[j].getPosition());
 			});
-			infowindow[j] = new google.maps.InfoWindow();
-		};
-		
+			
+		};		
 		while (i < size) {
+			var infowindow = new google.maps.InfoWindow();
 			if (listdata[i] != null) {
 				var friend = JSON.parse(listdata[i]);
 				var name;
@@ -72,30 +71,21 @@ function mapBuddies() {
 				}
 				name = friend.name;
 				i = i + 1;
-				if (location != "-") {					
-						marker[i].setPosition(myLocation);
-						infowindow[i].setContent(name);
-						infowindow[i].open(map, marker[i]);
-						google.maps.event.addListener(marker[i], 'click',
-								function() {
-									infowindow[i].setContent(name);
-									infowindow[i].open(map, marker[i]);
-								});
-
-					//geocoder.geocode({
-					//	address : myLocation
-					//}, function(results) {
-					//	alert(i+", "+name + "; localitatea: "+ location);
-					//	marker[i].setPosition(results[0].geometry.location);
-					//	infowindow[i].setContent(name);
-					//	infowindow[i].open(map, marker[i]);
-					//	google.maps.event.addListener(marker[i], 'click',
-					//			function() {
-					//				infowindow[i].setContent(name);
-					//				infowindow[i].open(map, marker[i]);
-					//			});
-					//
-					//});
+				if (location != "-") {
+					var x = myLocation.lat();
+					var y = myLocation.lng();					
+					var radius = 0.003;
+					x1 = x + radius * Math.cos(i);
+					y1 = y + radius * Math.sin(i);
+					pos1 = new google.maps.LatLng(x1, y1);	
+					marker[i].setPosition(pos1);
+					infowindow.setContent(name);
+					infowindow.open(map, marker[i]);
+					google.maps.event.addListener(marker[i], 'click',
+							function() {
+								//infowindow.setContent(name);
+								infowindow.open(map, this);
+							});
 				}
 			}
 		}
