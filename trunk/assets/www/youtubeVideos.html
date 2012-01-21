@@ -30,10 +30,25 @@
 			<div data-role="header" data-position="inline" class="header-socgps">
 				<h1>Check Videos</h1>
 			</div>
-			
+			<div data-role=controlgroup
+				style="font-size: 1em; margin-left: auto; margin-right: auto; width: 100%; text-align: center;">
+				<select name="categories" id="categories" 
+					data-native-menu="false">
+					<option>Categories</option>
+					<option value="">Categories</option>
+					<option value="All">All</option>
+					<option value="Travel">Traveling, Events</option>
+					<option value="Entertainment">Entertainment</option>
+					<option value="Tech">Science, Technologie</option>					
+				</select>
+				<script>
+					//Event on select places changes.
+					$("select#categories").bind("change", function(event, ui) {
+						searchClicked();
+					});
+			</script>
+			</div>
 			<div data-role="content" class="content-videos">
-				<h1>Results:</h1>
-				<br/>
 				<div id="videoResultsDiv"></div>
 				<!-- ShowMyVideos() will populate this div with results-->
 			</div>

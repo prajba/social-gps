@@ -1,14 +1,15 @@
 $('#page-videos').live(
 		"pagecreate",
-		function() {
-			searchClicked();	
+		function() {				
 		});
 function searchClicked()
         {
             document.getElementById("videoResultsDiv").innerHTML = 
                                     'Loading YouTube videos ...';
 
-            var category="Travel";
+            
+            var category= document.getElementById("categories").value;
+            
             var address = localStorage.getItem("address");
         	var addresses = address.split(",");
         	var city = addresses[1].replace(/[0-9]/g, "");
@@ -16,11 +17,21 @@ function searchClicked()
             var script = document.createElement('script');
             script.setAttribute('id', 'jsonScript');
             script.setAttribute('type', 'text/javascript');
-            script.setAttribute('src', 'http://gdata.youtube.com/feeds/' + 
-                   'videos?vq=' + city + '&max-results=5&' + 
-                   'alt=json-in-script&callback=showMyVideos&' + 
-                   'orderby=relevance&sortorder=descending&category='
-                   + category +'&format=5');
+            
+            if(category == "All"){
+            	script.setAttribute('src', 'http://gdata.youtube.com/feeds/' + 
+                        'videos?vq=' + city + '&max-results=5&' + 
+                        'alt=json-in-script&callback=showMyVideos&' + 
+                        'orderby=relevance&sortorder=descending&format=5');
+            }else{
+            	script.setAttribute('src', 'http://gdata.youtube.com/feeds/' + 
+                        'videos?vq=' + city + '&max-results=5&' + 
+                        'alt=json-in-script&callback=showMyVideos&' + 
+                        'orderby=relevance&sortorder=descending&category='
+                        + category +'&format=5');
+            }
+            
+            
 
             //attach script to current page -  this will submit asynchronous
             //search request, and when the results come back callback 
@@ -45,7 +56,7 @@ function searchClicked()
 
                  var lnk = "http://www.youtube.com/embed/"+videoId;
                 	 
-                 html.push('<div data-role="fieldcontain"><p>',title,'<\p><iframe class="youtube-player" type="text/html" width="640" height="385" frameborder="0" id="',id,'" src="',lnk,'"></iframe></div>');
+                 html.push('<div data-role="fieldcontain" style="font-size: 1em; margin-left: auto; margin-right: auto; width: 100%; text-align: center;"><p>',title,'<\p><iframe class="youtube-player" type="text/html" width="270" height="152" frameborder="0" id="',id,'" src="',lnk,'"></iframe></div>');
                  document.getElementById('videoResultsDiv').innerHTML = html.join('');
      				// this sets the id of the object or embed tag to 'myytplayer'.
      				// You then use this id to access the swf and make calls to the player's API 
