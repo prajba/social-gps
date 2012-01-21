@@ -263,7 +263,14 @@ function setUpMyLocationInfoWindow(){
 					position : myLocation
 		});	
 		google.maps.event.addListener(myLocationMarker, 'click', function() {
+		    if(currentPlaceInfoWindow){
+				   currentPlaceInfoWindow.close();
+			}
+			if(currentFriendInfoWindow){
+				currentFriendInfoWindow.close();
+			}			
 			myLocationInfoWindow.open(map, myLocationMarker);
+			
 		});
 	}else{
 		//For the second, third, and so on call to this function, just update position of the marker
