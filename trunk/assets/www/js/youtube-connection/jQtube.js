@@ -12,7 +12,7 @@ function searchClicked()
             
             var address = localStorage.getItem("address");
         	var addresses = address.split(",");
-        	var city = addresses[1].replace(/[0-9]/g, "");
+        	var city = addresses[addresses.length-2].replace(/[0-9]/g, "");
             //create a JavaScript element that returns our JSON data.
             var script = document.createElement('script');
             script.setAttribute('id', 'jsonScript');
