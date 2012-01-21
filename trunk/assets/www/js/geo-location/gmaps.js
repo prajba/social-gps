@@ -75,6 +75,12 @@ function createFriendMarker(friend,marker){
 						if(currentFriendInfoWindow){
 							currentFriendInfoWindow.close();
 						}
+						if(currentPlaceInfoWindow){
+							currentPlaceInfoWindow.close();
+						}
+						if(myLocationInfoWindow){
+							myLocationInfoWindow.close();
+						}
 						currentFriendInfoWindow=infowindow;
 						infowindow.setContent(friend.name);
 						infowindow.open(map, this);
@@ -157,6 +163,12 @@ function createMarker(place,type) {
 	    if(currentPlaceInfoWindow){
 		   currentPlaceInfoWindow.close();
 	    }
+	    if(currentFriendInfoWindow){
+			currentFriendInfoWindow.close();
+		}
+		if(myLocationInfoWindow){
+			myLocationInfoWindow.close();
+		}
 	    currentPlaceInfoWindow=infowindowplace;
 		infowindowplace.open(map,this);
 	});
