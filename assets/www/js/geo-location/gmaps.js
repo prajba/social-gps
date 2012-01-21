@@ -20,24 +20,7 @@ $('#page-map').live(
 		});
 
 /*
- * function MyLocationControl(controlDiv, map) { // Set CSS styles for the DIV
- * containing the control // Setting padding to 5 px will offset the control //
- * from the edge of the map. controlDiv.style.padding = '5px'; // Set CSS for
- * the control border. var controlUI = document.createElement('DIV');
- * controlUI.style.backgroundColor = 'white'; controlUI.style.borderStyle =
- * 'solid'; controlUI.style.borderWidth = '1px'; controlUI.style.cursor =
- * 'pointer'; controlUI.style.textAlign = 'center'; controlUI.title = 'Click to
- * set the map to your GPS Location'; controlDiv.appendChild(controlUI); // Set
- * CSS for the control interior. var controlText =
- * document.createElement('DIV'); controlText.style.fontFamily =
- * 'Arial,sans-serif'; controlText.style.fontSize = '12px';
- * controlText.style.paddingLeft = '4px'; controlText.style.paddingRight =
- * '4px'; controlText.innerHTML = 'Show My Location';
- * controlUI.appendChild(controlText); // Setup the click event listeners:
- * simply set the map to your gps location
- * google.maps.event.addDomListener(controlUI, 'click', function() {
- * 
- * }); }
+
  */
 function mapBuddies() {
 	var location;
@@ -49,11 +32,19 @@ function mapBuddies() {
 		var marker;
 		var radius = 0.003;
 		for ( var j = 0; j < size; j++) {
+			friend=JSON.parse(listdata[j]);
+			img = new Image(); 
+			alert("Friend id: "+friend.id);
+			img.src = "http://graph.facebook.com/" + friend.id + "/picture";
 			marker = new google.maps.Marker({
 				map : map,
 				position: new google.maps.LatLng(myLocation.lat()+radius*Math.cos(j),
 						myLocation.lng()+radius*Math.sin(j)),
-				draggable : true
+						icon : new google.maps.MarkerImage("http://graph.facebook.com/" + friend.id + "/picture",  
+						  		new google.maps.Size(30, 38),
+						  		// The origin for this image is 0,0.
+						  		new google.maps.Point(0,0)),
+						draggable : true
 			});
 			google.maps.event.addListener(marker, 'drag', function() {
 				$("input[name='request']").val(marker.getPosition());
@@ -61,7 +52,7 @@ function mapBuddies() {
 			google.maps.event.addListener(marker, 'dragend', function() {
 				$("input[name='request']").val(marker.getPosition());
 			});	
-			createFriendMarker(JSON.parse(listdata[j]),marker);
+			createFriendMarker(friend,marker);
 		}		
 	}
 }

@@ -4,8 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Related Videos</title>
 		<link href="css/facebook-css/style.css" rel="stylesheet" />
-		<link rel="stylesheet" href="css/facebook-css/facebook.css" />
-		<link rel="stylesheet" type="text/css" href="style.css" />
+		<link rel="stylesheet" type="text/css" href="css/youtube-css/videos.css" />
 		<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/redmond/jquery-ui.css" />
 		<link href="js/common/jquery-mobile/jquery.mobile-1.0.min.css"
 		rel="stylesheet" type="text/css" />
@@ -27,9 +26,10 @@
 	<body>
 		<div data-role="page" class="page-videos"  id="page-videos" data-theme="e"
 		data-add-back-btn="true">
-			<div data-role="header" data-position="inline" class="header-socgps">
+			<div data-role="header" data-position="inline" class="header-videos">
 				<h1>Check Videos</h1>
 			</div>
+			<div data-role="content" class="content-videos">
 			<div data-role=controlgroup
 				style="font-size: 1em; margin-left: auto; margin-right: auto; width: 100%; text-align: center;">
 				<select name="categories" id="categories" 
@@ -48,11 +48,10 @@
 					});
 			</script>
 			</div>
-			<div data-role="content" class="content-videos">
 				<div id="videoResultsDiv"></div>
 				<!-- ShowMyVideos() will populate this div with results-->
 			</div>
-			<div data-role="footer" class="footer-friends">
+			<div data-role="footer" class="footer-videos">
 					<div data-role=controlgroup
 				style="font-size: 1em; margin-left: auto; margin-right: auto; width: 100%; text-align: center;">
 			<button onClick="mobileChangePage('gmaps.html')">Show Map</button>
