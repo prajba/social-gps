@@ -4,14 +4,19 @@ var myLocationMarker;
 var myLocationInfoWindow;
 var directionsDisplay;
 var directionsService;
-var friends = new Array();
+var friends;
 var geocoder;
 var myLocation;
 var myLocationAddress;
 $('#page-map').live(
 		"pagecreate",
 		function() {
-			showMyLocation();	
+			map=null;
+			myLocationInfoWindow=null;
+			myLocationMarker=null;
+			geocoder=null;
+			friends=new Array();
+			showMyLocation();
 		});
 
 /*
@@ -93,11 +98,12 @@ function mapPlaces() {
 	if (storedData) {
 		splitedData = storedData.split('&');
 		for ( var j = 0; j < splitedData.length; j++) {
-			// alert("Iteration "+j);
 			splitedPlaces = splitedData[j].split('=');
-			// alert("SplitedPlaces: "+splitedPlaces[1]);
-			addPlaces(splitedPlaces[1]);
+			type=splitedPlaces[1];
+			$("#places option[value="+type+"]").attr('selected', 'selected');
+			addPlaces(type);
 		}
+		$("#places").selectmenu("refresh");
 	}
 }
 
@@ -151,10 +157,9 @@ function createMarker(place,type) {
 	infowindowplace = new google.maps.InfoWindow();
 
 	google.maps.event.addListener(marker, 'click', function() {
-		alert(place.vicinity);
 	   infowindowplace.setContent("<b>"+place.name+"</b></br>"+
-			   '<div style="text-align: center;" ><button style="height: 40px;" onClick=gohere('+placeLoc.lat()+","+placeLoc.lng()+")'>Go Here</button>" +
-			   '<button class="youtube_button" onClick=goVideos('+placeLoc.lat()+","+placeLoc.lng()+","+'"'+place.name+'"'+")'</button></div>");
+			   '<div style="text-align: center;"><button style="height: 40px;" onClick="gohere('+placeLoc.lat()+','+placeLoc.lng()+')">Go Here</button>' +
+			   '<button class="youtube_button" onClick="goVideos('+placeLoc.lat()+','+placeLoc.lng()+','+'"'+place.name+'"'+')"</button></div>');
 		infowindowplace.open(map,this);
 	});
 	markersArray.push(marker);
@@ -168,7 +173,6 @@ function goVideos(latitude,longitude,placeName){
 		    	  placeAddress=results[0].formatted_address;
 		    	  localStorage.setItem('placeAddress',placeAddress);
 		    	  localStorage.setItem('placeName',placeName);
-		    	  alert("Change page youtubeVideos");
 		    	  mobileChangePage('youtubeVideos.html');
 		      }else{
 		    	  alert("Videos about the selected place have been not found");
@@ -178,7 +182,6 @@ function goVideos(latitude,longitude,placeName){
 }
 
 function showMyLocation() {
-	alert("Show my Location")
 	navigator.geolocation.getCurrentPosition(onGPSRead, onGPSError, {
 		enableHighAccuracy : true
 	})
@@ -188,7 +191,6 @@ function showMyLocation() {
 
 
 function onGPSRead(location) {
-	alert("OnGPSREad");
 	myLocation = new google.maps.LatLng(location.coords.latitude,
 			location.coords.longitude);
 	localStorage.setItem('latitude',location.coords.latitude);
@@ -211,9 +213,10 @@ function onGPSRead(location) {
 	  	  if(!map){
 	  		  initializeMap();
 	  		  mapBuddies();
+	  		  mapPlaces();
 	  	  }
 	  	  setUpMyLocationInfoWindow();
-	  	setTimeout("showMyLocation()",15000);
+	  	  setTimeout("showMyLocation()",15000);
 	});
 }
 
