@@ -158,11 +158,31 @@ function createMarker(place,type) {
 	infowindowplace = new google.maps.InfoWindow();
 
 	google.maps.event.addListener(marker, 'click', function() {
+		alert(place.vicinity);
 	   infowindowplace.setContent("<b>"+place.name+"</b></br>"+
-			   "<button onClick='gohere("+placeLoc.lat()+","+placeLoc.lng()+")'>Go Here</button>");
+			   "<button onClick='gohere("+placeLoc.lat()+","+placeLoc.lng()+")'>Go Here</button>" +
+			   "<button onClick='goVideos("+placeLoc.lat()+","+placeLoc.lng()+","+'"'+place.name+'"'+")'>Videos</button>");
 		infowindowplace.open(map,this);
 	});
 	markersArray.push(marker);
+}
+
+function goVideos(latitude,longitude,placeName){
+		alert("GoVideos "+latitude+","+longitude+" name "+placeName);
+		var placeLocation = new google.maps.LatLng(latitude,longitude);
+		geocoder.geocode({'latLng': placeLocation}, function(results, status) {
+		      if (status == google.maps.GeocoderStatus.OK && results[0]) {
+		         // $('#address').val(results[0].formatted_address); What is this $(#address)?
+		    	  placeAddress=results[0].formatted_address;
+		    	  localStorage.setItem('placeAddress',placeAddress);
+		    	  localStorage.setItem('placeName',placeName);
+		    	  alert("Change page youtubeVideos");
+		    	  mobileChangePage('youtubeVideos.html');
+		      }else{
+		    	  alert("Videos about the selected place have been not found");
+		    	  placeAddress="";
+		      }	 
+		});
 }
 
 function showMyLocation() {
