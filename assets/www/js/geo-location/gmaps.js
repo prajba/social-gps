@@ -168,7 +168,6 @@ function createMarker(place,type) {
 }
 
 function goVideos(latitude,longitude,placeName){
-		alert("GoVideos "+latitude+","+longitude+" name "+placeName);
 		var placeLocation = new google.maps.LatLng(latitude,longitude);
 		geocoder.geocode({'latLng': placeLocation}, function(results, status) {
 		      if (status == google.maps.GeocoderStatus.OK && results[0]) {
@@ -241,7 +240,9 @@ function setUpMyLocationInfoWindow(){
 	if(!myLocationInfoWindow){
 		myLocationInfoWindow = new google.maps.InfoWindow();
 	}
-	myLocationInfoWindow.setContent("I'm here: "+myLocationAddress);
+	myLocationInfoWindow.setContent("I'm here: "+myLocationAddress+
+			   '<button onClick=mobileChangePage("youtubeVideos.html")>Videos</button>' +
+			   '<button onClick=mobileChangePage("wikiPlace.html")>Wikipedia</button>');
 	if(!myLocationMarker){
 		myLocationMarker = new google.maps.Marker({		
 			map : map,
