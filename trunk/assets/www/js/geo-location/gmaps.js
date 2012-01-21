@@ -33,9 +33,6 @@ function mapBuddies() {
 		var radius = 0.003;
 		for ( var j = 0; j < size; j++) {
 			friend=JSON.parse(listdata[j]);
-			img = new Image(); 
-			alert("Friend id: "+friend.id);
-			img.src = "http://graph.facebook.com/" + friend.id + "/picture";
 			marker = new google.maps.Marker({
 				map : map,
 				position: new google.maps.LatLng(myLocation.lat()+radius*Math.cos(j),
