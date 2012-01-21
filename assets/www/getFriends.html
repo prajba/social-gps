@@ -1,27 +1,32 @@
 <html>
 <head>
 <title>Get Friends</title>
-
-
 <!-- Include the normal stylesheet-->
 <link href="css/facebook-css/style.css" rel="stylesheet" />
 <link rel="stylesheet" href="css/facebook-css/facebook.css" />
 <link rel="stylesheet" type="text/css" href="style.css" />
 <link href="js/common/jquery-mobile/jquery.mobile-1.0.min.css" rel="stylesheet" type="text/css" />
 <link href="js/common/jquery-mobile/jquery.mobile.structure-1.0.min.css" rel="stylesheet" type="text/css" />
-
 <script src="js/common/jquery-mobile/jquery-1.7.1.js" type="text/javascript"></script>
 <script src="js/common/jquery-mobile/jquery.mobile-1.0.min.js" type="text/javascript"></script>
 <script src="http://connect.facebook.net/en_US/all.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/common/socialGPSUtil.js"></script>    
 <script type="text/javascript" charset="utf-8" src="js/facebook-connection/facebook_connection.js"></script>
-
 </head>
 <body>
 
 <div data-role="page" class="checkFriends"  id="connectToFB" data-theme="e"
 		data-add-back-btn="true">
-		<div data-role="header" data-position="inline" class="header-socgps">
+		<script>
+		 $('#connectToFB').bind('pageshow', function() {								
+				var storedData = localStorage.getItem("friends");
+				if (storedData) {	
+					//alert("in pageshow");
+					refreshFriendSelect();		
+				}
+		});
+		</script>
+		<div data-role="header" data-position="inline" class="header-friends">
 			<h1>Check Friends</h1>
 		</div>
 
@@ -35,14 +40,14 @@
 style="font-size: 1em; margin-left: auto; margin-right: auto; width: 100%; text-align: center;"
 
 data-type="horizontal">
-	<script>
-$( ".getFriends" ).bind( "click", function(event, ui) {
-	
+<!--<script>
+$( ".getFriends" ).bind( "click", function(event, ui) {	
 	getFriends_FB();
 });
+
 </script>
 	<button class="getFriends">Get Friends</button>
-
+-->
 
 
 <div id="status"></div>
@@ -58,25 +63,16 @@ $( ".getFriends" ).bind( "click", function(event, ui) {
 <div data-role="collapsible" data-theme="e" data-content-theme="d">
 <h3><a href="#">Select friends from current town:</a></h3>
 		   <div data-role="fieldcontain">	
-			
+					
 				   <select style="text-align:left;" name="friends" id="friends" multiple="multiple" data-native-menu="false">
 						    <option>Choose friends</option>			
 				   </select>	
- <script>
+					<script>					
 					//Event on select places changes.
 					$("select#friends").bind("change", function(event, ui) {
-						saveFriendsToLocalStorage();
-						//populateFriendsSelect();
-					});
-					/*$("select#friends" ).selectmenu({
-					   		create: function(event, ui) { 
-					   			alert("in open");
-					   			populateFriendsSelect();
-					   		}
-						});
-						*/
-					</script>	
-							
+						saveFriendsToLocalStorage();						
+					});					
+					</script>								
 		   </div>
 </div>
 </div>
@@ -91,7 +87,7 @@ $( ".getFriends" ).bind( "click", function(event, ui) {
 
 				data-type="horizontal">
 
-				<button onClick="mobileChangePage('index.html#page-map')">Show map</button>
+				<button onClick="mobileChangePage('gmaps.html')">Show map</button>
 
 			</div>
 
