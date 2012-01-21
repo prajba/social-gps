@@ -8,6 +8,8 @@ var friends;
 var geocoder;
 var myLocation;
 var myLocationAddress;
+var currentFriendInfoWindow;
+var currentPlaceInfoWindow;
 $('#page-map').live(
 		"pagecreate",
 		function() {
@@ -70,6 +72,10 @@ function createFriendMarker(friend,marker){
 			//infowindow.open(map, marker[i]);
 			google.maps.event.addListener(marker, 'click',
 					function() {
+						if(currentFriendInfoWindow){
+							currentFriendInfoWindow.close();
+						}
+						currentFriendInfoWindow=infowindow;
 						infowindow.setContent(friend.name);
 						infowindow.open(map, this);
 					}
@@ -148,6 +154,10 @@ function createMarker(place,type) {
 	   infowindowplace.setContent("<b>"+place.name+"</b></br>"+
 			   '<div style="text-align: center;"><button style="height: 40px;" onClick="gohere('+placeLoc.lat()+','+placeLoc.lng()+')">Go Here</button>' +
 			   '<button class="youtube_button" onClick="goVideos('+placeLoc.lat()+','+placeLoc.lng()+','+'"'+place.name+'"'+')"</button></div>');
+	    if(currentPlaceInfoWindow){
+		   currentPlaceInfoWindow.close();
+	    }
+	    currentPlaceInfoWindow=infowindowplace;
 		infowindowplace.open(map,this);
 	});
 	markersArray.push(marker);
