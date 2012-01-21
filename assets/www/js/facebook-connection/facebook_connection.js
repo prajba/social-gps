@@ -228,7 +228,8 @@ var localFriends = new Array();
 function loadLocation(friendNumber) {
 	var message = "<img src='img/common/waiting.gif'/>"
 	jqmSimpleMessage(message); 
-	var currentLocation =  "Hagenberg";//localStorage.getItem("address");// localStorage.getItem("location");		
+	var currentLocation =  localStorage.getItem("address");// localStorage.getItem("location");
+	//"Hagenberg";
 	//alert(currentLocation);
 	FB.api("/" + friends[friendNumber].id, function(response) {
 		var out = "";
