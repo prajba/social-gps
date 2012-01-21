@@ -1,0 +1,23 @@
+.page-wiki {
+	width: 100%;
+	height: 100%;
+	padding: 0;
+}
+
+.header-wiki {
+	width: 100%;
+	height: 10%;
+	padding: 0;
+}
+
+.content-wiki {
+	width: 100%;
+	height: 75%;
+	padding: 0;
+}
+
+.footer-wiki {
+	width: 100%;
+	height: 15%;
+	padding: 0;
+}

@@ -1,0 +1,23 @@
+.page-videos {
+	width: 100%;
+	height: 100%;
+	padding: 0;
+}
+
+.header-videos {
+	width: 100%;
+	height: 10%;
+	padding: 0;
+}
+
+.content-videos {
+	width: 100%;
+	height: 75%;
+	padding: 0;
+}
+
+.footer-videos {
+	width: 100%;
+	height: 15%;
+	padding: 0;
+}
