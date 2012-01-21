@@ -38,56 +38,49 @@ function mapBuddies() {
 	var location;
 	var name;
 	var storedData = localStorage.getItem("friends");
-	alert(storedData);
 	if (storedData) {
 		listdata = JSON.parse(storedData);
 		var size = listdata.length;
-		var i = 0;
-		var marker = new Array();
-		var infowindow = new Array();
+		var marker;
+		var radius = 0.003;
 		for ( var j = 0; j < size; j++) {
-			marker[j] = new google.maps.Marker({
+			marker = new google.maps.Marker({
 				map : map,
+				position: new google.maps.LatLng(myLocation.lat()+radius*Math.cos(j),
+						myLocation.lng()+radius*Math.sin(j)),
 				draggable : true
 			});
-			google.maps.event.addListener(marker[j], 'drag', function() {
-				$("input[name='request']").val(marker[j].getPosition());
+			google.maps.event.addListener(marker, 'drag', function() {
+				$("input[name='request']").val(marker.getPosition());
 			});
-			google.maps.event.addListener(marker[j], 'dragend', function() {
-				$("input[name='request']").val(marker[j].getPosition());
-			});
-			
-		};		
-		while (i < size) {
-			var infowindow = new google.maps.InfoWindow();
-			if (listdata[i] != null) {
-				var friend = JSON.parse(listdata[i]);
-				var name;
-				var location;
-				if (friend.location != null) {
-					location = friend.location["name"];
-				} else {
-					location = "-";
-				}
-				name = friend.name;
-				i = i + 1;
-				if (location != "-") {
-					var x = myLocation.lat();
-					var y = myLocation.lng();					
-					var radius = 0.003;
-					x1 = x + radius * Math.cos(i);
-					y1 = y + radius * Math.sin(i);
-					pos1 = new google.maps.LatLng(x1, y1);	
-					marker[i].setPosition(pos1);
-					infowindow.setContent(name);
-					infowindow.open(map, marker[i]);
-					google.maps.event.addListener(marker[i], 'click',
-							function() {
-								//infowindow.setContent(name);
-								infowindow.open(map, this);
-							});
-				}
-			}
+			google.maps.event.addListener(marker, 'dragend', function() {
+				$("input[name='request']").val(marker.getPosition());
+			});	
+			createFriendMarker(JSON.parse(listdata[j]),marker);
+		}		
+	}
+}
+
+function createFriendMarker(friend,marker){
+	var infowindow = new google.maps.InfoWindow();
+	if (friend) {
+		var name;
+		var location;
+		if (friend.location != null) {
+			location = friend.location["name"];
+		} else {
+			location = "-";
+		}
+		name = friend.name;
+		if (location != "-") {
+			//infowindow.setContent(name);
+			//infowindow.open(map, marker[i]);
+			google.maps.event.addListener(marker, 'click',
+					function() {
+						infowindow.setContent(friend.name);
+						infowindow.open(map, this);
+					}
+			);
 		}
 	}
 }
@@ -185,15 +178,17 @@ function goVideos(latitude,longitude,placeName){
 }
 
 function showMyLocation() {
+	alert("Show my Location")
 	navigator.geolocation.getCurrentPosition(onGPSRead, onGPSError, {
 		enableHighAccuracy : true
 	})
 	//Every 15 sec location will be updated. e.g we are on the move
-	setTimeout("showMyLocation()",15000);
+	//setTimeout("showMyLocation()",15000);
 }
 
 
 function onGPSRead(location) {
+	alert("OnGPSREad");
 	myLocation = new google.maps.LatLng(location.coords.latitude,
 			location.coords.longitude);
 	localStorage.setItem('latitude',location.coords.latitude);
@@ -218,6 +213,7 @@ function onGPSRead(location) {
 	  		  mapBuddies();
 	  	  }
 	  	  setUpMyLocationInfoWindow();
+	  	setTimeout("showMyLocation()",15000);
 	});
 }
 
@@ -279,5 +275,6 @@ function initializeMap(){
 }
 
 function onGPSError() {
-	alert(" I cannot find you :(")
+	alert(" I cannot find you :(");
+	setTimeout("showMyLocation()",15000);
 }
