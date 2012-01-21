@@ -39,7 +39,7 @@
 					var address = localStorage.getItem("address");
                     var addresses = address.split(",");
                     var city = addresses[addresses.length-2].replace(/[0-9]/g, "");                    
-                    document.getElementById('frameDiv').innerHTML ='<iframe width="500" heigh="600" src="http://en.m.wikipedia.org/wiki/'+city+'"></iframe>';
+                    document.getElementById('frameDiv').innerHTML ='<iframe style=" width: 100%; heigh: 600px; text-align: center;" src="http://en.m.wikipedia.org/wiki/'+city+'"></iframe>';
 					//document.getElementById('frameDiv').innerHTML ='<iframe src="'+wikiLink + '></iframe>';
 				</script>							
 			</div>
