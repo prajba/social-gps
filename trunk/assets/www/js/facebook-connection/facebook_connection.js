@@ -9,8 +9,6 @@ $('#connectToFB')
 		.live(
 				"pagecreate",
 				function() {
-
-
 				FB.init({
 						appId : "152639234839875",
 						status : true,
@@ -61,6 +59,24 @@ $('#connectToFB')
 															}
 														});
 									}
+									var storedData = localStorage.getItem("friends");
+									var message = "<img src='img/common/waiting.gif'/>"
+									jqmSimpleMessage(message); 
+									if (storedData) {		
+										//alert("in init!");
+										//refreshFriendSelect();		
+									}else{
+									FB.api("/me/friends?fields=id,name,gender,languages,picture,location,birthday,work,education",
+										function(response) {
+											//document.getElementById("status").innerHTML = "Please wait...";											
+											var message = "<img src='img/common/waiting.gif'/>"
+											jqmSimpleMessage(message); 
+											friends = response["data"];							
+											totalToBeLoaded = friends.length;												
+											loadLocation(0);							
+										}
+									);
+									}
 								} else {
 									// document.getElementById("status").innerHTML
 									// = "You have not given required
@@ -107,63 +123,112 @@ function getFriends_FB() {
 }
 
 
-
+function jqmSimpleMessage(message) {
+    $("<div class='ui-loader ui-overlay-shadow ui-body-b ui-corner-all'><h1>" + message + "</h1></div>")
+        .css({
+            display: "block",
+            opacity: 0.96,
+            top: window.pageYOffset+100
+        })
+        .appendTo("body").delay(800)
+        .fadeOut(400, function(){
+            $(this).remove();
+        });
+}
 
 
 //saves the selected friends from the select menu to localStorage
 function saveFriendsToLocalStorage() {
 	var friends = $('#friends').serialize();
 	localStorage.setItem("selectedfriends", friends);
-	var storedData = localStorage.getItem("selectedfriends");
+	var storedData = localStorage.getItem("selectedfriends");	
 }
 
 function populateFriendsSelect() {
-	var storedData = localStorage.getItem("selectedfriends");	
+	var storedData = localStorage.getItem("selectedfriends");		
 	if (storedData) {		
 		splitedData = storedData.split('&');
 		for ( var j = 0; j < splitedData.length; j++) {			
-			splitedFriends = splitedData[j].split('=');			
+			splitedFriends = splitedData[j].split('=');						
 			addFriends(splitedFriends[1]);
 		}
 	}
 }
 
 function addFriends(name) {
-	alert(name +" "+ localStorage.getItem("address"));
 	var options = '<option selected="selected" value="' + name + '">' + name
 			+ '</option>';
-	alert(name, localStorage.getItem("address"));
 	$("select#friends").append(options);
 	$("select#friends").selectmenu("refresh");
 }
 
 
+//check whether the name is in the selected friends list or not
+function verif(name){		
+	var storedData = localStorage.getItem("selectedfriends");		
+	if (storedData) {		
+		splitedData = storedData.split('&');		
+		for ( var j = 0; j < splitedData.length; j++) {					
+			splitedFriends = splitedData[j].split('=');										
+			halfName = splitedFriends[1].split('+');
+			var fullName = halfName[0];
+			for (var k = 1; k < halfName.length; k++){				
+				fullName = fullName +" "+halfName[k];
+			}
+			if (fullName == name){
+				return true;		
+			}				
+		}
+	}	
+	return false;
+}
 
-function refreshFriendSelect(){
+function loadImgs(id, name){		
+	var img = new Image();	
+	img.src = "http://graph.facebook.com/" + id + "/picture";
+	img.alt = img.title = name;		
+	document.getElementById("pics").appendChild(img);	
+}
+
+var ok;
+function refreshFriendSelect(){		
 	var name;
-	var i = 0;
+	var i = 0;	
 	var storedData = localStorage.getItem("friends");
+	document.getElementById("pics").innerHTML = "";
 	if (storedData) {
 		listdata = JSON.parse(storedData);
 		var size = listdata.length;
+		$('select#friends').empty();
 		while (i <= size) {
-		if (listdata[i] != null) {
-			var friend = JSON.parse(listdata[i]);
-			name = friend.name;
-			var options = '<option value="' + name + '">' + name
-			+ '</option>';
-			$("select#friends").append(options);
-			$("select#friends").selectmenu("refresh");
+			if (listdata[i] != null) {
+				var friend = JSON.parse(listdata[i]);		
+				name = friend.name;	
+				loadImgs(friend.id, name);				
+				var options;
+				if (verif(name) == true){					
+					options = '<option value="' + name + '" selected>' + name
+					+ '</option>';
+				}else{								
+					options = '<option value="' + name + '">' + name
+					+ '</option>';
+				};
+				$("select#friends").append(options);
+				$("select#friends").selectmenu("refresh");			
+			};
+			i =  i + 1;
 		}
-		}
-	}
+	}	
 }
+
 
 var real = 0;
 var localFriends = new Array();
 // load the images one at a time
-function loadLocation(friendNumber) {	
-	var currentLocation =  localStorage.getItem("address");// localStorage.getItem("location");		
+function loadLocation(friendNumber) {
+	var message = "<img src='img/common/waiting.gif'/>"
+	jqmSimpleMessage(message); 
+	var currentLocation =  "Hagenberg";//localStorage.getItem("address");// localStorage.getItem("location");		
 	//alert(currentLocation);
 	FB.api("/" + friends[friendNumber].id, function(response) {
 		var out = "";
@@ -209,14 +274,6 @@ function loadImage(imgNumber) {
 	img.alt = img.title = friends[imgNumber].name;
 	imgLoaded++;
 	document.getElementById("pics").appendChild(img);
-	document.getElementById("count").innerHTML = imgLoaded + " of "
-			+ totalToBeLoaded + " images loaded";
-
-	// ensures that the next image gets loaded only after an image has finished
-	// loading
-	// img.onload = function() {
-	// loadImage(imgLoaded)
-	// };
 }
 
 function addNewRow(data1, data2) {
