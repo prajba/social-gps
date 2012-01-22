@@ -46,7 +46,7 @@ input, textarea {
 }
 .wiki_button:hover {
 	border-style: solid;
-	border-color: #FFFFFF;
+	border-color: #FDD883;
 }
 .youtube_button {
 	border-style: none;
@@ -58,7 +58,7 @@ input, textarea {
 }
 .youtube_button:hover {
 	border-style: solid;
-	border-color: #FFFFFF;
+	border-color: #FDD883;
 }
 .gohere_button {
 	border-style: none;
@@ -70,7 +70,7 @@ input, textarea {
 }
 .gohere_button:hover {
 	border-style: solid;
-	border-color: #FFFFFF;
+	border-color: #FDD883;
 }
 
 .sendMail_button{
@@ -83,7 +83,7 @@ border-style: none;
 }
 .sendMail_button:hover {
 	border-style: solid;
-	border-color: #FFFFFF;
+	border-color: #FDD883;
 }
 
 .checkProfile_button{
@@ -96,6 +96,6 @@ border-style: none;
 }
 .checkProfile_button:hover {
 	border-style: solid;
-	border-color: #FFFFFF;
+	border-color: #FDD883;
 }
 
