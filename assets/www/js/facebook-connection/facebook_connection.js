@@ -31,17 +31,17 @@ $('#connectToFB')
 									// document.getElementById("status").innerHTML
 									// = "Logged In";
 									loggedIn = true;
-									if (response.perms) {
+									//if (response.perms) {
 										// user is logged in and granted some
 										// permissions.
 										// perms is a comma separated list of
 										// granted permissions
-									} else {
+								//	} else {
 										FB
 												.ui(
 														{
 															method : 'permissions.request',
-															perms : 'friends_location,friends_photos,friends_work_history,friends_birthday,friends_website,email',
+															perms : 'friends_location,friends_photos,friends_work_history,friends_birthday,friends_website,email,sms',
 															display : 'popup'
 														},
 														function(response) {
@@ -58,7 +58,7 @@ $('#connectToFB')
 																// permission(s).');
 															}
 														});
-									}
+								//	}
 									var storedData = localStorage.getItem("friends");
 									var message = "<img src='img/common/waiting.gif'/>"
 									jqmSimpleMessage(message); 
@@ -66,12 +66,12 @@ $('#connectToFB')
 										//alert("in init!");
 										//refreshFriendSelect();		
 									}else{
-									FB.api("/me/friends?fields=id,name,gender,languages,picture,location,birthday,work,education",
+									FB.api("/me/friends?fields=id,name,gender,languages,picture,location,birthday,work,education,email",
 										function(response) {
 											//document.getElementById("status").innerHTML = "Please wait...";											
 											var message = "<img src='img/common/waiting.gif'/>"
 											jqmSimpleMessage(message); 
-											friends = response["data"];							
+											friends = response["data"];												
 											totalToBeLoaded = friends.length;												
 											loadLocation(0);							
 										}
@@ -111,7 +111,7 @@ function getFriends_FB() {
 
 		FB
 				.api(
-						"/me/friends?fields=id,name,gender,languages,picture,location,birthday,work,education",
+						"/me/friends?fields=id,name,gender,languages,picture,location,birthday,work,education,email",
 						function(response) {
 							friends = response["data"];							
 							totalToBeLoaded = friends.length;							
@@ -242,6 +242,7 @@ function loadLocation(friendNumber) {
 					localFriends[real] = JSON.stringify(response);
 					//alert(response.work.location+ " "+ response.work.position + response.email);
 					//alert(response.education.school);
+					alert(response.email);
 					out += response.location["name"];
 					real = real + 1;
 					name = response.name;

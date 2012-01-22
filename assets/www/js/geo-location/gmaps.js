@@ -21,9 +21,28 @@ $('#page-map').live(
 			showMyLocation();
 		});
 
-/*
+		
+//check whether the name is in the selected friends list or not
+function verif(name){		
+	var storedData = localStorage.getItem("selectedfriends");		
+	if (storedData) {		
+		splitedData = storedData.split('&');		
+		for ( var j = 0; j < splitedData.length; j++) {					
+			splitedFriends = splitedData[j].split('=');										
+			halfName = splitedFriends[1].split('+');
+			var fullName = halfName[0];
+			for (var k = 1; k < halfName.length; k++){				
+				fullName = fullName +" "+halfName[k];
+			}
+			if (fullName == name){
+				return true;		
+			}				
+		}
+	}	
+	return false;
+}
 
- */
+/* place the friends from the current town on the map */
 function mapBuddies() {
 	var location;
 	var name;
@@ -35,23 +54,25 @@ function mapBuddies() {
 		var radius = 0.003;
 		for ( var j = 0; j < size; j++) {
 			friend=JSON.parse(listdata[j]);
-			marker = new google.maps.Marker({
-				map : map,
-				position: new google.maps.LatLng(myLocation.lat()+radius*Math.cos(j),
-						myLocation.lng()+radius*Math.sin(j)),
-						icon : new google.maps.MarkerImage("http://graph.facebook.com/" + friend.id + "/picture",  
-						  		new google.maps.Size(30, 38),
-						  		// The origin for this image is 0,0.
-						  		new google.maps.Point(0,0)),
-						draggable : true
-			});
-			google.maps.event.addListener(marker, 'drag', function() {
-				$("input[name='request']").val(marker.getPosition());
-			});
-			google.maps.event.addListener(marker, 'dragend', function() {
-				$("input[name='request']").val(marker.getPosition());
-			});	
-			createFriendMarker(friend,marker);
+			if (verif(friend.name) == true){
+				marker = new google.maps.Marker({
+					map : map,
+					position: new google.maps.LatLng(myLocation.lat()+radius*Math.cos(j),
+							myLocation.lng()+radius*Math.sin(j)),
+							icon : new google.maps.MarkerImage("http://graph.facebook.com/" + friend.id + "/picture",  
+									new google.maps.Size(30, 38),
+									// The origin for this image is 0,0.
+									new google.maps.Point(0,0)),
+							draggable : true
+				});
+				google.maps.event.addListener(marker, 'drag', function() {
+					$("input[name='request']").val(marker.getPosition());
+				});
+				google.maps.event.addListener(marker, 'dragend', function() {
+					$("input[name='request']").val(marker.getPosition());
+				});	
+				createFriendMarker(friend,marker);
+			}
 		}		
 	}
 }
