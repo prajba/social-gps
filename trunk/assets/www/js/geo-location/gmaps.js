@@ -105,11 +105,11 @@ function createFriendMarker(friend,marker){
 						currentFriendInfoWindow=infowindow;								
 						if (friend.username != null) {															
 							infowindow.setContent(friend.name+
-							'<div style="text-align: center;" ><a class="sendMail_button" href=" mailto:'+friend.username+'@facebook.com">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>'+
-							'<a class="checkProfile_button"  a href="'+friend.link+'")>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a></div>');
+							'<div style="text-align: center;" ><a href=" mailto:'+friend.username+'@facebook.com"><button class="sendMail_button" onclick=""></button></a>'+
+							'<a href="'+friend.link+'")><button class="checkProfile_button" onclick=""></button></a></div>');
 						}else{							
 							infowindow.setContent(friend.name+'<div style="text-align: center;" >No e-mail address available!'+
-							'<a class="checkProfile_button"  a href="'+friend.link+'")>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a></div>');
+							'<a href="'+friend.link+'")><button class="checkProfile_button" onclick=""></button></a></div>');
 						}
 						infowindow.open(map, this);
 					}
