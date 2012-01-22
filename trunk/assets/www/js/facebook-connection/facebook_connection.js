@@ -242,12 +242,13 @@ var localFriends = new Array();
 function loadLocation(friendNumber) {
 	var message = "<img src='img/common/waiting.gif'/>"
 	jqmSimpleMessage(message); 
-	var currentLocation =  localStorage.getItem("address");// localStorage.getItem("location");
+	//alert(localStorage.getItem("address"));
+	var currentLocation = localStorage.getItem("address");// localStorage.getItem("location");
 	//"Hagenberg";
 	//alert(currentLocation);
 	FB.api("/" + friends[friendNumber].id, function(response) {
 		var out = "";
-		if (response.location != null) {		
+		if ((response.location != null)&&(response.location["name"] != null)) {		
 
 //			if (currentLocation.indexOf(response.location["name"]) != -1) {
 			if ((response.location["name"].indexOf(currentLocation) != -1) || (currentLocation.indexOf(response.location["name"]) != -1)) {
