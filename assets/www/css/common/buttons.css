@@ -72,3 +72,30 @@ input, textarea {
 	border-style: solid;
 	border-color: #FFFFFF;
 }
+
+.sendMail_button{
+border-style: none;
+	background-image: url('../../img/common/email-button.png');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	width: 60px;
+	height: 40px;
+}
+.sendMail_button:hover {
+	border-style: solid;
+	border-color: #FFFFFF;
+}
+
+.checkProfile_button{
+border-style: none;
+	background-image: url('../../img/common/check-profile-button.png');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	width: 60px;
+	height: 40px;
+}
+.checkProfile_button:hover {
+	border-style: solid;
+	border-color: #FFFFFF;
+}
+
