@@ -102,8 +102,14 @@ function createFriendMarker(friend,marker){
 						if(myLocationInfoWindow){
 							myLocationInfoWindow.close();
 						}
-						currentFriendInfoWindow=infowindow;
-						infowindow.setContent(friend.name);
+						currentFriendInfoWindow=infowindow;								
+						if (friend.username != null) {															
+							infowindow.setContent(friend.name+
+							'<div style="text-align: center;" ><a href=" mailto:'+friend.username+'@facebook.com">Send E-mail</a>'+
+							'<button " onClick=mobileChangePage("'+friend.link+'")>Go to profile!</button></div>');
+						}else{							
+							infowindow.setContent(friend.name+'<div style="text-align: center;" >No e-mail address available!'+'<button" onClick=mobileChangePage("'+friend.link+'")>Go to profile!</button></div>');
+						}
 						infowindow.open(map, this);
 					}
 			);
