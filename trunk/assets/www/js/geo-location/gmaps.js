@@ -157,9 +157,9 @@ function createMarker(place,type) {
 	infowindowplace = new google.maps.InfoWindow();
 
 	google.maps.event.addListener(marker, 'click', function() {
-	   infowindowplace.setContent("<b>"+place.name+"</b></br>"+
-			   '<div style="text-align: center;"><button style="height: 40px;" onClick="gohere('+placeLoc.lat()+','+placeLoc.lng()+')">Go Here</button>' +
-			   '<button class="youtube_button" onClick="goVideos('+placeLoc.lat()+','+placeLoc.lng()+','+'"'+place.name+'"'+')"</button></div>');
+	   infowindowplace.setContent("<b>"+place.name+"</b>"+
+			   '<div style="text-align: center;"><button class="gohere_button" onClick="gohere('+placeLoc.lat()+','+placeLoc.lng()+')"></button>' +
+			   '<button class="youtube_button" onClick="goVideos('+placeLoc.lat()+','+placeLoc.lng()+','+'\''+place.name+'\''+')"</button></div>');
 	    if(currentPlaceInfoWindow){
 		   currentPlaceInfoWindow.close();
 	    }

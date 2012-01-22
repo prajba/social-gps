@@ -41,18 +41,42 @@
 
 .wiki_button{
       border-style: none;
-      background-image: url('wikipedia-icon.png');
+      background-image: url('../../img/common/wikipedia-icon.png');
       background-repeat: no-repeat;
       background-size:100% 100%;
       width: 40px;
       height: 40px;
 }
 
+.wiki_button:hover{
+      border-style: solid;
+      border-color: #FFFFFF;
+}
+
 .youtube_button{
       border-style: none;
-      background-image: url('youtube_icon.png');
+      background-image: url('../../img/common/youtube_icon.png');
       background-repeat: no-repeat;
       background-size:100% 100%;
       width: 40px;
       height: 40px;
+}
+
+.youtube_button:hover{
+      border-style: solid;
+      border-color: #FFFFFF;
+}
+
+.gohere_button{
+      border-style: none;
+      background-image: url('../../img/common/go_here.png');
+      background-repeat: no-repeat;
+      background-size:100% 100%;
+      width: 40px;
+      height: 40px;
+}
+
+.gohere_button:hover{
+      border-style: solid;
+      border-color: #FFFFFF;
 }
