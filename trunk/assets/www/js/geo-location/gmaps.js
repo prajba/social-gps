@@ -104,12 +104,12 @@ function createFriendMarker(friend,marker){
 						}
 						currentFriendInfoWindow=infowindow;								
 						if (friend.username != null) {															
-							infowindow.setContent('<div style="text-align: center;" >' + friend.name+
+							infowindow.setContent('<div class="infowindow"><div style="text-align: center;" >' + friend.name+
 							'</div><div style="text-align: center;" ><a href=" mailto:'+friend.username+'@facebook.com"><button class="sendMail_button" onclick=""></button></a>'+
-							'<a href="'+friend.link+'")><button class="checkProfile_button" onclick=""></button></a></div>');
+							'<a href="'+friend.link+'")><button class="checkProfile_button" onclick=""></button></a></div></div>');
 						}else{							
-							infowindow.setContent('<div style="text-align: center;" >' + friend.name+'</div><div style="text-align: center;" >No e-mail address available!'+
-							'<a href="'+friend.link+'")><button class="checkProfile_button" onclick=""></button></a></div>');
+							infowindow.setContent('<div class="infowindow"><div style="text-align: center;" >' + friend.name+'</div><div style="text-align: center;" >No e-mail address available!'+
+							'<a href="'+friend.link+'")><button class="checkProfile_button" onclick=""></button></a></div></div>');
 						}
 						infowindow.open(map, this);
 					}
@@ -185,9 +185,9 @@ function createMarker(place,type) {
 	infowindowplace = new google.maps.InfoWindow();
 
 	google.maps.event.addListener(marker, 'click', function() {
-	   infowindowplace.setContent("<b>"+place.name+"</b>"+
+	   infowindowplace.setContent('<div  class="infowindow"><b>'+place.name+"</b>"+
 			   '<div style="text-align: center;"><button class="gohere_button" onClick="gohere('+placeLoc.lat()+','+placeLoc.lng()+')"></button>' +
-			   '<button class="youtube_button" onClick="goVideos('+placeLoc.lat()+','+placeLoc.lng()+','+'\''+place.name+'\''+')"</button></div>');
+			   '<button class="youtube_button" onClick="goVideos('+placeLoc.lat()+','+placeLoc.lng()+','+'\''+place.name+'\''+')"</button></div></div>');
 	    if(currentPlaceInfoWindow){
 		   currentPlaceInfoWindow.close();
 	    }
@@ -277,9 +277,9 @@ function setUpMyLocationInfoWindow(){
 	if(!myLocationInfoWindow){
 		myLocationInfoWindow = new google.maps.InfoWindow();
 	}
-	myLocationInfoWindow.setContent("I'm here: "+myLocationAddress+
+	myLocationInfoWindow.setContent('<div  class="infowindow">I\'m here: '+myLocationAddress+
 			   '<div style="text-align: center;" ><button class="youtube_button" onClick=mobileChangePage("youtubeVideos.html")></button>' +
-			   '<button class="wiki_button" onClick=mobileChangePage("wikiPlace.html")></button></div>');
+			   '<button class="wiki_button" onClick=mobileChangePage("wikiPlace.html")></button></div></div>');
 	if(!myLocationMarker){
 		myLocationMarker = new google.maps.Marker({		
 			map : map,
