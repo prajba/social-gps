@@ -31,43 +31,25 @@
 <body>
 	<div data-role="page" class="page-gmaps" id="page-map" data-theme="e"
 		data-add-back-btn="true">
-
 		<div data-role="header" data-position="inline" class="header-gmaps">
-
 			<h1>GEOLOCATION</h1>
-
 		</div>
 
 		<div data-role="content" class="content-gmaps">
-
 			<div id="map_canvas" class="map_canvas">
-
 				<!-- map loads here... -->
-
 			</div>
-
 		</div>
 
 		<div data-role="footer" class="footer-gmaps">
-
 			<div data-role="controlgroup"
 				style="font-size: 1em; margin-left: auto; margin-right: auto; width: 100%; text-align: center;"
 				data-type="horizontal">
-	<script>
-$( ".MapBuddies" ).bind( "click", function(event, ui) {
-	
-	mapBuddies();
-});
-</script>
-						<button class="MapBuddies">Map Friends</button>				
-
-				<button onClick="mobileChangePage('getFriends.html')">GetFriends</button>
-				<button onClick="mobileChangePage('youtubeVideos.html')">Videos</button>
-			</div>
-
-			<div data-role=controlgroup
-				style="font-size: 1em; margin-left: auto; margin-right: auto; width: 100%; text-align: center;">
-
+				<script>
+					$( ".MapBuddies" ).bind( "click", function(event, ui) {	
+						mapBuddies();
+					});
+				</script>		
 				<select name="places" id="places" multiple="multiple"
 					data-native-menu="false">
 					<option>Places</option>
@@ -85,7 +67,9 @@ $( ".MapBuddies" ).bind( "click", function(event, ui) {
 						savePlacesToLocalStorage();
 						mapPlaces();
 					});
-			</script>
+			   </script>	
+				<button onClick="mobileChangePage('getFriends.html')">GetFriends</button>
+				<button onClick="mobileChangePage('youtubeVideos.html')">Videos</button>
 			</div>
 		</div>
 	</div>
