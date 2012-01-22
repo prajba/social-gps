@@ -1,6 +1,13 @@
+var place = localStorage.getItem("placeName");
+
 $('#page-videos').live(
 		"pagecreate",
-		function() {				
+		function() {
+			place = localStorage.getItem("placeName");
+			if(place != null){
+				document.getElementById("categorySelect").style.display = 'none';
+				searchClicked();
+			}
 		});
 function searchClicked()
         {
@@ -12,32 +19,20 @@ function searchClicked()
             script.setAttribute('id', 'jsonScript');
             script.setAttribute('type', 'text/javascript');
             
-            
-            var category= document.getElementById("categories").value;
-            
-            
-        	var place = localStorage.getItem("placeName");
+        	// place = localStorage.getItem("placeName");
         	
         	// when we search for videos about our location
         	if(place != null){
         		var placeAddress = localStorage.getItem("placeAddress");
         		var addresses = placeAddress.split(",");
-            	var city = addresses[addresses.length-2].replace(/[0-9]/g, "");
-            	
-            	 if(category == "All"){
-                 	script.setAttribute('src', 'http://gdata.youtube.com/feeds/' + 
+            	var city = addresses[addresses.length-2].replace(/[0-9]/g, "");            	
+            	script.setAttribute('src', 'http://gdata.youtube.com/feeds/' + 
                              'videos?vq=' + place + city + '&max-results=5&' + 
                              'alt=json-in-script&callback=showMyVideos&' + 
-                             'orderby=relevance&sortorder=descending&format=5');
-                 }else{
-                 	script.setAttribute('src', 'http://gdata.youtube.com/feeds/' + 
-                             'videos?vq=' + city + '&max-results=5&' + 
-                             'alt=json-in-script&callback=showMyVideos&' + 
-                             'orderby=relevance&sortorder=descending&category='
-                             + category +'&format=5');
-                 }
+                             'orderby=relevance&sortorder=descending&format=5');                
             	 
         	}else{ // when we search for videos about a place
+        		var category= document.getElementById("categories").value;
         		var address = localStorage.getItem("address");
             	var addresses = address.split(",");
             	var city = addresses[addresses.length-2].replace(/[0-9]/g, "");
