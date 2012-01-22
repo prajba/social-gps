@@ -1,12 +1,15 @@
-var place = localStorage.getItem("placeName");
+var place = "";
 
 $('#page-videos').live(
 		"pagecreate",
 		function() {
 			place = localStorage.getItem("placeName");
-			if(place != null){
+			if(place != null && place != ""){
 				document.getElementById("categorySelect").style.display = 'none';
 				searchClicked();
+				localStorage.setItem('placeName',"");
+			} else{
+				document.getElementById("categorySelect").style.display = 'inline';
 			}
 		});
 function searchClicked()
@@ -30,7 +33,7 @@ function searchClicked()
                              'videos?vq=' + place + city + '&max-results=5&' + 
                              'alt=json-in-script&callback=showMyVideos&' + 
                              'orderby=relevance&sortorder=descending&format=5');                
-            	 
+            	 place="";
         	}else{ // when we search for videos about a place
         		var category= document.getElementById("categories").value;
         		var address = localStorage.getItem("address");
