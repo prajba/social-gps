@@ -61,7 +61,8 @@ $('#connectToFB')
 								//	}
 									var storedData = localStorage.getItem("friends");
 									var message = "<img src='img/common/waiting.gif'/>"
-									jqmSimpleMessage(message); 
+									var min = 3600;
+									jqmSimpleMessage1(message, min); 
 									if (storedData) {		
 										//alert("in init!");
 										//refreshFriendSelect();		
@@ -70,7 +71,7 @@ $('#connectToFB')
 										function(response) {
 											//document.getElementById("status").innerHTML = "Please wait...";											
 											var message = "<img src='img/common/waiting.gif'/>"
-											jqmSimpleMessage(message); 
+											jqmSimpleMessage(message); 											
 											friends = response["data"];												
 											totalToBeLoaded = friends.length;												
 											loadLocation(0);							
@@ -136,6 +137,19 @@ function jqmSimpleMessage(message) {
         });
 }
 
+
+function jqmSimpleMessage1(message,min) {
+    $("<div class='ui-loader ui-overlay-shadow ui-body-b ui-corner-all'><h1>" + message + "</h1></div>")
+        .css({
+            display: "block",
+            opacity: 0.96,
+            top: window.pageYOffset+100
+        })
+        .appendTo("body").delay(min)
+        .fadeOut(400, function(){
+            $(this).remove();
+        });
+}
 
 //saves the selected friends from the select menu to localStorage
 function saveFriendsToLocalStorage() {
@@ -242,7 +256,7 @@ function loadLocation(friendNumber) {
 					localFriends[real] = JSON.stringify(response);
 					//alert(response.work.location+ " "+ response.work.position + response.email);
 					//alert(response.education.school);
-					alert(response.email);
+					//alert(response.name+ " "+response.id + " "+ response.username);
 					out += response.location["name"];
 					real = real + 1;
 					name = response.name;
