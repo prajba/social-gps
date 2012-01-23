@@ -21,7 +21,7 @@ function searchClicked() {
 	// place = localStorage.getItem("placeName");
 
 	// when we search for videos about our location
-	if (place != null) {
+	if (place != null && place != "") {
 		var placeAddress = localStorage.getItem("placeAddress");
 		var addresses = placeAddress.split(",");
 		var city = addresses[addresses.length - 2].replace(/[0-9]/g, "");
