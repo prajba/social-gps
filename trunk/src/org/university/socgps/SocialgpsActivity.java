@@ -7,7 +7,7 @@ public class SocialgpsActivity extends DroidGap {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.appView.getSettings().setPluginsEnabled(true); 
+      //  this.appView.getSettings().setPluginsEnabled(true); 
         super.loadUrl("file:///android_asset/www/index.html");
     }
 }
