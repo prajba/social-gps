@@ -28,19 +28,18 @@
 		data-add-back-btn="true">
 			<div data-role="header" data-position="inline" class="header-wiki">
 				<h1>Check Wikipedia</h1>
-			</div>	
+			</div>
 			<div data-role="content" class="content-wiki">
-				<div id="frameDiv" data-role=controlgroup
-				style="font-size: 1em; margin-left: auto; margin-right: auto; width: 100%; height: 100%; text-align: center;">						
-				</div>	
+				<div id="frameDiv" data-role="controlgroup"
+				style="font-size: 1em; margin-left: auto; margin-right: auto; width: 100%; height: 100%; text-align: center;"></div>
 				<script>
 					//Event on select places changes.
 					var address = localStorage.getItem("address");
-                    var addresses = address.split(",");
-                    var city = addresses[addresses.length-2].replace(/[0-9]/g, "");                    
-                    document.getElementById('frameDiv').innerHTML ='<iframe style=" width: 100%; heigh: 100%; text-align: center;" src="http://en.m.wikipedia.org/wiki/'+city+'"></iframe>';
+					var addresses = address.split(",");
+					var city = addresses[addresses.length - 2].replace(/[0-9]/g, "");
+					document.getElementById('frameDiv').innerHTML = '<iframe style=" width: 100%; heigh: 100%; text-align: center;" src="http://en.m.wikipedia.org/wiki/' + city + '"></iframe>';
 					//document.getElementById('frameDiv').innerHTML ='<iframe src="'+wikiLink + '></iframe>';
-				</script>							
+				</script>
 			</div>
 			<div data-role="footer" class="footer-wiki">
 				<div data-role=controlgroup
